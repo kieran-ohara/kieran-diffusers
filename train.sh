@@ -26,4 +26,5 @@ cd $DREAMBOOTH && accelerate launch train_dreambooth.py \
   --num_class_images=200 \
   --max_train_steps=1200 \
   --gradient_checkpointing \
-  --mixed_precision=fp16
+  --mixed_precision=fp16 \
+  --use_8bit_adam
