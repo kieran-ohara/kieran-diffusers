@@ -4,8 +4,8 @@ THIS=$(pwd)
 DREAMBOOTH="${SRC}/Shivan-diffusers/examples/dreambooth"
 
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
-export CLASS_DIR="${THIS}/class/people"
 export INSTANCE_DIR="${THIS}/instances/kieran2"
+export CLASS_DIR="${THIS}/class/man3"
 export OUTPUT_DIR="${THIS}/model"
 
 cd $DREAMBOOTH && accelerate launch train_dreambooth.py \
