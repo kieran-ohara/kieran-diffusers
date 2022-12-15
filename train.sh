@@ -1,6 +1,6 @@
 #!/bin/bash
 SRC="${HOME}/src"
-THIS="${SRC}/kieran-stuff"
+THIS=$(pwd)
 DREAMBOOTH="${SRC}/Shivan-diffusers/examples/dreambooth"
 
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
