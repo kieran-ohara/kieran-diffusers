@@ -1,4 +1,4 @@
-import 'source-map-support/register';
+import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import StableDiffusion from "../lib/stacks/stable-diffusion";
 
