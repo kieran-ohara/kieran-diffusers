@@ -32,7 +32,8 @@ git clone https://github.com/facebookresearch/xformers.git ~/src/xformers
 cd ~/src/xformers
 git submodule update --init --recursive
 pip install -r requirements.txt
-CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=8.6 pip install -e . # This takes some time yo.
+# 8.6 for A10, 7.5 for T4. This can take some time.
+CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=7.5 pip install -e .
 
 # Alacritty Terminals
 cd ~/
