@@ -1,10 +1,26 @@
 from diffusers import StableDiffusionPipeline
 import torch
+import os
 
-model_id = "/home/ec2-user/src/data-dir/model/1200"
-pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
+model_name = "4002"
+model_id = os.getcwd()+"/model/"+model_name
 
-prompt = "a photo of kieran in the hogwarts great hall who is in the slytherin house"
-image = pipe(prompt, num_inference_steps=50, guidance_scale=7.5).images[0]
+prompt = "kokieran man rides a bike, high definition, space, photo realistic, waterpaint"
+dir = model_name
+path = os.getcwd()+"/output/"+dir
 
-image.save("/home/ec2-user/src/kieran-stuff/image.png")
+pipe = StableDiffusionPipeline.from_pretrained(
+    model_id,
+    torch_dtype=torch.float16).to("cuda")
+
+
+isExist = os.path.exists(path)
+if not isExist:
+   os.makedirs(path)
+
+for n in range(20):
+    image = pipe(
+        prompt,
+        num_inference_steps=50,
+        guidance_scale=7.5).images[0]
+    image.save(path+"/image"+str(n)+".png")
