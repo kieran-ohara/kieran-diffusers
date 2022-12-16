@@ -51,3 +51,6 @@ pip install -q accelerate==0.12.0 transformers ftfy bitsandbytes gradio natsort
 
 # This repo. Hey.
 git clone https://github.com/kieran-ohara/kieran-diffusers ~/src/kieran-diffusers
+
+# etc.
+sudo yum install -y ncdu
