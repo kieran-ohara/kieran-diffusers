@@ -56,7 +56,7 @@ export default class StableDiffusion extends cdk.Stack {
       vpcSubnets: {
         subnets: [
           ec2.Subnet.fromSubnetAttributes(this, 'test', {
-            subnetId: 'subnet-00090ff0d1dde872e',
+            subnetId: 'subnet-0cdd13ca0570e6910',
             availabilityZone,
           })
         ]
