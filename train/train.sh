@@ -1,10 +1,10 @@
 #!/bin/bash
 SRC="${HOME}/src"
 THIS=$(pwd)
-DREAMBOOTH="${SRC}/Shivan-diffusers/examples/dreambooth"
+DREAMBOOTH="${SRC}/diffusers/examples/dreambooth"
 
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
-export INSTANCE_DIR="${THIS}/instances/kieran2"
+export INSTANCE_DIR="${THIS}/train/instances/kieran2"
 export CLASS_DIR="${THIS}/class/man3"
 export OUTPUT_DIR="${THIS}/model"
 

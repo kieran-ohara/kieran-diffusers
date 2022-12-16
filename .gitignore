@@ -2,6 +2,6 @@
 __pycache__
 cdk.out
 class
-instances
+train/instances
 model
 output
