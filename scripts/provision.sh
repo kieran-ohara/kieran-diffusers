@@ -1,5 +1,8 @@
 #!/bin/bash -xe
 
+# Git
+sudo yum install -y git
+
 # CUDA
 sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo yum-config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo
@@ -9,10 +12,11 @@ sudo yum -y install cuda-11.7.1-1
 sudo yum -y install cuda-drivers
 
 # Conda
-yum install libXcomposite libXcursor libXi libXtst libXrandr alsa-lib mesa-libEGL libXdamage mesa-libGL libXScrnSaver
+sudo yum install -y libXcomposite libXcursor libXi libXtst libXrandr alsa-lib mesa-libEGL libXdamage mesa-libGL libXScrnSaver
 curl -L https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh -o install-conda.sh
 chmod 755 install-conda.sh
 ./install-conda.sh -bu
+rm install-conda.sh
 ME=$(whoami)
 eval "$(/home/${ME}/anaconda3/bin/conda shell.bash hook)"
 conda init
@@ -28,11 +32,21 @@ git clone https://github.com/facebookresearch/xformers.git ~/src/xformers
 cd ~/src/xformers
 git submodule update --init --recursive
 pip install -r requirements.txt
-CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=8.6 pip install .
+CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=8.6 pip install -e . # This takes some time yo.
 
 # Alacritty Terminals
-curl -L https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info > ~/alacritty.info
+cd ~/
+curl -L https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info > alacritty.info
 sudo tic -xe alacritty,alacritty-direct alacritty.info
+rm alacritty.info
 
-# Git
-sudo yum install -y git
+# Diffusers fork that runs on GPU < 16G
+git clone https://github.com/ShivamShrirao/diffusers.git ~/src/diffusers
+cd ~/src/diffusers
+pip install -e .
+cd examples/dreambooth
+pip install -q -U --pre triton
+pip install -q accelerate==0.12.0 transformers ftfy bitsandbytes gradio natsort
+
+# This repo. Hey.
+git clone https://github.com/kieran-ohara/kieran-diffusers ~/src/kieran-diffusers
