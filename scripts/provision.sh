@@ -54,3 +54,4 @@ git clone https://github.com/kieran-ohara/kieran-diffusers ~/src/kieran-diffuser
 
 # etc.
 sudo yum install -y ncdu
+sudo yum install -y tmux #b/c I want my physical computer to sleep while the training goes on.
