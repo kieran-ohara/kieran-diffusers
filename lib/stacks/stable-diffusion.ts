@@ -43,14 +43,7 @@ export default class StableDiffusion extends cdk.Stack {
       0
     );
 
-    const instance = new ec2.Instance(this, "Instance", {
-      machineImage: new ec2.AmazonLinuxImage({
-        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
-        edition: ec2.AmazonLinuxEdition.STANDARD,
-        virtualization: ec2.AmazonLinuxVirt.HVM,
-        storage: ec2.AmazonLinuxStorage.GENERAL_PURPOSE,
-      }),
-      instanceType: new ec2.InstanceType("g4dn.xlarge"),
+    const instanceProps = {
       keyName: "kieranohara",
       vpc,
       vpcSubnets: {
@@ -68,10 +61,31 @@ export default class StableDiffusion extends cdk.Stack {
           volume: ec2.BlockDeviceVolume.ebs(ebsSize),
         },
       ],
+    }
+
+    const instance = new ec2.Instance(this, "Instance", {
+      machineImage: new ec2.AmazonLinuxImage({
+        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+        edition: ec2.AmazonLinuxEdition.STANDARD,
+        virtualization: ec2.AmazonLinuxVirt.HVM,
+        storage: ec2.AmazonLinuxStorage.GENERAL_PURPOSE,
+      }),
+      instanceType: new ec2.InstanceType("g4dn.xlarge"),
+      ...instanceProps,
+    });
+    new ec2.CfnEIP(this, "eip", {
+      instanceId: instance.instanceId,
     });
 
-    const eip = new ec2.CfnEIP(this, "eip", {
-      instanceId: instance.instanceId,
+    const trainingInstance = new ec2.Instance(this, "TrainInstance", {
+      machineImage: ec2.MachineImage.genericLinux({
+        'eu-west-2': 'ami-0ecbde7c9ea33b8d2',
+      }),
+      instanceType: new ec2.InstanceType("g4dn.xlarge"),
+      ...instanceProps,
+    });
+    new ec2.CfnEIP(this, "TrainEIP", {
+      instanceId: trainingInstance.instanceId,
     });
 
     const bucket = new s3.Bucket(this, "bucket");
