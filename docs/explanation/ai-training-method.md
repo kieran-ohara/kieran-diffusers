@@ -10,6 +10,12 @@ To try and maintain some sort of control over the experiment, I want to lock the
 | num_class_images   | 200      |
 | learning_rate      | 5e-6     |
 
-## s1200_5e-06
+# Exp2.
 
-- steps 1200
+| variable           | value    |
+| ------------------ | -------- |
+| instance_daata_dir | kieran2  |
+| instance prompt    | kokieran |
+| class_prompt       | man      |
+| num_class_images   | 200      |
+| learning_rate      | 2e-6     |
