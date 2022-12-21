@@ -63,20 +63,16 @@ export default class StableDiffusion extends cdk.Stack {
       ],
     }
 
-    const instance = new ec2.Instance(this, "Instance", {
-      machineImage: new ec2.AmazonLinuxImage({
-        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
-        edition: ec2.AmazonLinuxEdition.STANDARD,
-        virtualization: ec2.AmazonLinuxVirt.HVM,
-        storage: ec2.AmazonLinuxStorage.GENERAL_PURPOSE,
-      }),
-      instanceType: new ec2.InstanceType("g4dn.xlarge"),
-      ...instanceProps,
-    });
+    // const amazonAmi: machineImage = new ec2.AmazonLinuxImage({
+    //   generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+    //   edition: ec2.AmazonLinuxEdition.STANDARD,
+    //   virtualization: ec2.AmazonLinuxVirt.HVM,
+    //   storage: ec2.AmazonLinuxStorage.GENERAL_PURPOSE,
+    // }),
 
-    const trainingInstance = new ec2.Instance(this, "TrainInstance", {
+    const instance = new ec2.Instance(this, "Instance", {
       machineImage: ec2.MachineImage.genericLinux({
-        'eu-west-2': 'ami-0ecbde7c9ea33b8d2',
+        'eu-west-2': this.node.tryGetContext('euWestAMI'),
       }),
       instanceType: new ec2.InstanceType("g4dn.xlarge"),
       ...instanceProps,
