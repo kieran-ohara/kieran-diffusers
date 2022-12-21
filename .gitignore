@@ -1,7 +1,8 @@
 .DS_Store
+.obsidian
 __pycache__
 cdk.out
 class
-train/instances
 model
 output
+train/instances
