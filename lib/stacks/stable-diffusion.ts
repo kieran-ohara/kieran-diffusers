@@ -73,9 +73,6 @@ export default class StableDiffusion extends cdk.Stack {
       instanceType: new ec2.InstanceType("g4dn.xlarge"),
       ...instanceProps,
     });
-    new ec2.CfnEIP(this, "eip", {
-      instanceId: instance.instanceId,
-    });
 
     const trainingInstance = new ec2.Instance(this, "TrainInstance", {
       machineImage: ec2.MachineImage.genericLinux({
