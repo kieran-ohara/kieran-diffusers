@@ -84,9 +84,6 @@ export default class StableDiffusion extends cdk.Stack {
       instanceType: new ec2.InstanceType("g4dn.xlarge"),
       ...instanceProps,
     });
-    new ec2.CfnEIP(this, "TrainEIP", {
-      instanceId: trainingInstance.instanceId,
-    });
 
     const bucket = new s3.Bucket(this, "bucket");
     bucket.grantReadWrite(instance.role);
