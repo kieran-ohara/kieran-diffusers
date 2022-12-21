@@ -82,6 +82,14 @@ export default class StableDiffusion extends cdk.Stack {
       ...instanceProps,
     });
 
+    // const trainingInstance = new ec2.Instance(this, "TrainInstance", {
+    //   machineImage: ec2.MachineImage.genericLinux({
+    //     'eu-west-2': 'ami-0ecbde7c9ea33b8d2',
+    //   }),
+    //   instanceType: new ec2.InstanceType("g4dn.xlarge"),
+    //   ...instanceProps,
+    // });
+
     const bucket = new s3.Bucket(this, "bucket");
     bucket.grantReadWrite(instance.role);
   }
