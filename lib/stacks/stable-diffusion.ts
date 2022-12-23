@@ -78,9 +78,31 @@ export default class StableDiffusion extends cdk.Stack {
       ...instanceProps,
     });
 
+    const numberRunningInstances = 1
+
+    const sharedSizeInGb = {
+      diffuserModel: 4 * provisionSpaceForDiffusionModelCount,
+      class: 1,
+      instance: 1,
+    }
+    const sharedSize = Object.values(sharedSizeInGb).reduce((acc, current)=>acc+current, 0)
+    const volume = new ec2.Volume(this, 'Volume', {
+      availabilityZone: availabilityZone,
+      size: cdk.Size.gibibytes(sharedSize),
+      encrypted: false,
+      volumeType: ec2.EbsDeviceVolumeType.IO2,
+      enableMultiAttach: true,
+      iops: 3000
+    });
+
+    new ec2.CfnVolumeAttachment(this, 'Attach', {
+      device: '/dev/xvdc',
+      instanceId: instance.instanceId,
+      volumeId: volume.volumeId,
+    })
     // const trainingInstance = new ec2.Instance(this, "TrainInstance", {
     //   machineImage: ec2.MachineImage.genericLinux({
-    //     'eu-west-2': 'ami-0ecbde7c9ea33b8d2',
+    //     'eu-west-2': this.node.tryGetContext('euWestAMI'),
     //   }),
     //   instanceType: new ec2.InstanceType("g4dn.xlarge"),
     //   ...instanceProps,
