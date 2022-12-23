@@ -53,5 +53,7 @@ pip install -q accelerate==0.12.0 transformers ftfy bitsandbytes gradio natsort
 git clone https://github.com/kieran-ohara/kieran-diffusers ~/src/kieran-diffusers
 
 # etc.
-sudo yum install -y ncdu
 sudo yum install -y tmux #b/c I want my physical computer to sleep while the training goes on.
+
+sudo amazon-linux-extras install epel -y
+sudo yum install -y ncdu
