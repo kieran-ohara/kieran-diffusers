@@ -2,8 +2,7 @@
 .obsidian
 __pycache__
 cdk.out
-class
+data
 model
 output
-train/instances
 Session.vim

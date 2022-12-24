@@ -4,8 +4,8 @@ THIS=$(pwd)
 DREAMBOOTH="${SRC}/diffusers/examples/dreambooth"
 
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
-export INSTANCE_DIR="${THIS}/train/instances/kieran2"
-export CLASS_DIR="${THIS}/class/man3"
+export INSTANCE_DIR="${THIS}/data/instances/kieran2"
+export CLASS_DIR="${THIS}/data/class/man4400"
 export OUTPUT_DIR="${THIS}/model"
 
 cd $DREAMBOOTH && accelerate launch train_dreambooth.py \
@@ -23,8 +23,8 @@ cd $DREAMBOOTH && accelerate launch train_dreambooth.py \
   --learning_rate=5e-6 \
   --lr_scheduler="constant" \
   --lr_warmup_steps=0 \
-  --num_class_images=200 \
-  --max_train_steps=1200 \
+  --num_class_images=2400 \
+  --max_train_steps=2400 \
   --gradient_checkpointing \
   --mixed_precision=fp16 \
   --use_8bit_adam
