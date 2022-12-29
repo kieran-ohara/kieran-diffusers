@@ -6,3 +6,4 @@ data
 model
 output
 Session.vim
+scripts/prov-compare.sh
