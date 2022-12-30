@@ -1,6 +1,7 @@
 import { Construct } from "constructs";
 import * as cdk from "aws-cdk-lib";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as ecr from "aws-cdk-lib/aws-ecr"
 import * as s3 from "aws-cdk-lib/aws-s3";
 
 interface StableDiffusionProps extends cdk.StackProps {}
@@ -113,5 +114,8 @@ export default class StableDiffusion extends cdk.Stack {
 
     const bucket = new s3.Bucket(this, "bucket");
     bucket.grantReadWrite(instance.role);
+
+    const repository = new ecr.Repository(this, 'Repository');
+    repository.grantPullPush(instance.role);
   }
 }
