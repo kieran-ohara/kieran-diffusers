@@ -3,10 +3,6 @@
 # Git
 sudo yum install -y git
 
-# Easy to figure out where all the space is going.
-# N/A on rocky linux
-# sudo yum install -y ncdu
-
 # I want my physical computer to sleep while the training goes on.
 sudo yum install -y tmux
 
