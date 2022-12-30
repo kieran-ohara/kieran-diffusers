@@ -21,16 +21,16 @@ build {
   ]
 
   provisioner "shell" {
-    environment_vars = [
-      "HOME=/root",
-      "ARCH=7.5"
-    ]
     inline = [
       "yum install -y sudo",
     ]
   }
 
   provisioner "shell" {
+    environment_vars = [
+      "HOME=/root",
+      "ARCH=7.5"
+    ]
     scripts = [
       "./scripts/utils.sh",
       "./scripts/conda-env.sh",

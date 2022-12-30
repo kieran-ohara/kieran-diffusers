@@ -1,9 +1,10 @@
 .DS_Store
 .obsidian
+Session.vim
 __pycache__
 cdk.out
 data
 model
 output
-Session.vim
 scripts/prov-compare.sh
+varfile.json
