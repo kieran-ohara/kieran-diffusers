@@ -17,4 +17,4 @@ git clone https://github.com/facebookresearch/xformers.git ~/src/xformers
 cd ~/src/xformers
 git submodule update --init --recursive
 pip install -r requirements.txt --no-cache-dir
-# CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=$ARCH FORCE_CUDA="1" pip install -e .
+CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=$ARCH pip install -e .
