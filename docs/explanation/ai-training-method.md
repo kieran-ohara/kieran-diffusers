@@ -5,40 +5,44 @@ ensure I was only seeing the difference in LR/Steps.
 
 # Exp1.
 
-| variable          | value    |
-| ----------------- | -------- |
-| instance_data_dir | kieran2  |
-| instance prompt   | kokieran |
-| class_prompt      | man      |
-| num_class_images  | 200      |
-| learning_rate     | 5e-6     |
+| variable                | value        |
+| ----------------------- | ------------ |
+| instance_data_dir       | kieran2      |
+| instance prompt         | kokieran     |
+| class_prompt            | man          |
+| num_class_images        | 200          |
+| learning_rate           | 5e-6         |
+| interpolate with prompt | kokieran man |
 
 # Exp2.
 
-| variable          | value    |
-| ----------------- | -------- |
-| instance_data_dir | kieran2  |
-| instance prompt   | kokieran |
-| class_prompt      | man      |
-| num_class_images  | 200      |
-| learning_rate     | 2e-6     |
+| variable                | value        |
+| ----------------------- | ------------ |
+| instance_data_dir       | kieran2      |
+| instance prompt         | kokieran     |
+| class_prompt            | man          |
+| num_class_images        | 200          |
+| learning_rate           | 2e-6         |
+| interpolate with prompt | kokieran man |
 
 # Exp3
 
-| variable          | value    |
-| ----------------- | -------- |
-| instance_data_dir | kieran2  |
-| instance prompt   | kokieran |
-| class_prompt      | man      |
-| num_class_images  | 2400     |
-| learning_rate     | 5e-6     |
+| variable                | value        |
+| ----------------------- | ------------ |
+| instance_data_dir       | kieran2      |
+| instance prompt         | kokieran     |
+| class_prompt            | man          |
+| num_class_images        | 2400         |
+| learning_rate           | 5e-6         |
+| interpolate with prompt | kokieran man |
 
 # Exp4
 
-| variable          | value    |
-| ----------------- | -------- |
-| instance_data_dir | kieran2  |
-| instance prompt   | kokieran |
-| class_prompt      | man      |
-| num_class_images  | 4400     |
-| learning_rate     | 5e-6     |
+| variable                | value        |
+| ----------------------- | ------------ |
+| instance_data_dir       | kieran2      |
+| instance prompt         | kokieran     |
+| class_prompt            | man          |
+| num_class_images        | 4400         |
+| learning_rate           | 5e-6         |
+| interpolate with prompt | kokieran man |
