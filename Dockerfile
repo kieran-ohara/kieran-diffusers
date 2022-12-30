@@ -22,5 +22,5 @@ RUN yum install -y which
 COPY scripts/xformers.sh .
 RUN ./xformers.sh && rm xformers.sh
 
-# COPY scripts/source-code.sh .
-# RUN ./source-code.sh && rm /root/source-code.sh
+COPY scripts/source-code.sh .
+RUN ./source-code.sh && rm /root/source-code.sh
