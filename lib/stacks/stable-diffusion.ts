@@ -95,7 +95,7 @@ export default class StableDiffusion extends cdk.Stack {
       encrypted: false,
       volumeType: ec2.EbsDeviceVolumeType.IO2,
       enableMultiAttach: true,
-      iops: 3000,
+      iops: 100,
     });
 
     new ec2.CfnVolumeAttachment(this, "Attach", {
