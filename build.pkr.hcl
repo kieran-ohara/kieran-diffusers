@@ -23,6 +23,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "HOME=/root",
+      "ARCH=7.5"
     ]
     inline = [
       "yum install -y sudo",
@@ -33,7 +34,7 @@ build {
     scripts = [
       "./scripts/utils.sh",
       "./scripts/conda-env.sh",
-      "./scripts/xformers.sh 8.6",
+      "./scripts/xformers.sh",
       "./scripts/source-code.sh"
     ]
   }

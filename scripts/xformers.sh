@@ -2,8 +2,6 @@
 
 # 8.6 for A10, 7.5 for T4. This can take some time.
 # see https://developer.nvidia.com/cuda-gpus
-ARCH=$1
-
 if [ -z "$ARCH" ]
 then
   echo "Please specify arch."
