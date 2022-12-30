@@ -22,7 +22,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "yum install -y sudo",
+      "yum install -y sudo which",
     ]
   }
 
