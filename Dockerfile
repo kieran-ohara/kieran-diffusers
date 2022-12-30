@@ -17,6 +17,8 @@ RUN ./utils.sh && rm /root/utils.sh
 COPY scripts/conda-env.sh .
 RUN ./conda-env.sh && rm /root/conda-env.sh
 
+RUN yum install -y which
+
 COPY scripts/xformers.sh .
 RUN ./xformers.sh && rm xformers.sh
 
