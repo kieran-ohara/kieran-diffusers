@@ -50,3 +50,7 @@ def model_info(model_name):
     data = json.loads(f)
     f.close()
     return data
+
+def inspect(model_name):
+    model_info = model_info(model_name)
+    print(model_info)

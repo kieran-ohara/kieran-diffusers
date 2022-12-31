@@ -5,19 +5,18 @@ import torch
 import argparse
 
 if __name__ == "__main__":
-    print("Hello, World!")
-
     parser = argparse.ArgumentParser(
                         prog = 'ProgramName',
                         description = 'What the program does',
                         epilog = 'Text at the bottom of help')
     parser.add_argument('model')
     parser.add_argument('-l', '--learningrate')
+    parser.add_argument('-p', '--prompts', default="prompts")
     args = parser.parse_args()
 
     pipe = util.get_pipeline(args.model)
 
-    with open(f'{util.script_dir()}/prompts.txt') as file:
+    with open(f'{util.script_dir()}/{args.prompts}.txt') as file:
         prompts = [util.interpolate_prompt(line, instance='kokieran man') for line in file]
         num_images_per_prompt = 5
 
@@ -31,4 +30,4 @@ if __name__ == "__main__":
         )
 
         grid = util.image_grid(images.images, len(prompts), num_images_per_prompt)
-        grid.save(f'{util.output_path(args.model)}/image.png')
+        grid.save(f'{util.output_path(args.model)}/image_{args.prompts}.png')
