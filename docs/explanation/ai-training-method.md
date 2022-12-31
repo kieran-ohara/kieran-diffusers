@@ -68,3 +68,14 @@ ensure I was only seeing the difference in LR/Steps.
 | num_class_images        | 2400         |
 | learning_rate           | 4e-6         |
 | interpolate with prompt | kokieran man |
+
+# Exp7
+
+| variable                | value        |
+| ----------------------- | ------------ |
+| instance_data_dir       | kieran3      |
+| instance prompt         | kokieran     |
+| class_prompt            | man          |
+| num_class_images        | 2400         |
+| learning_rate           | 4e-6         |
+| interpolate with prompt | kokieran man |
