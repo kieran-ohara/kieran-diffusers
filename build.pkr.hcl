@@ -45,22 +45,25 @@ build {
   }
 }
 
+variable "region" {}
+variable "source_ami" {}
 variable "ssh_keypair_name" {}
+variable "ssh_username" {}
 
 source "amazon-ebs" "g4dn" {
-  ami_name      = "kieran-diffusers"
-  instance_type = "g4dn.xlarge"
-  region        = "eu-west-2"
-  source_ami = "ami-084e8c05825742534"
-  ssh_username = "ec2-user"
+  ami_name         = "kieran-diffusers"
+  instance_type    = "g4dn.xlarge"
+  region           = var.region
+  source_ami       = var.source_ami
+  ssh_username     = var.ssh_username
   ssh_keypair_name = var.ssh_keypair_name
-  ssh_agent_auth = true
-  communicator         = "ssh"
+  ssh_agent_auth   = true
+  communicator     = "ssh"
 
   launch_block_device_mappings {
     device_name = "/dev/xvda"
     volume_size = "48"
-    volume_type= "gp2"
+    volume_type = "gp2"
   }
 }
 

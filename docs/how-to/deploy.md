@@ -5,6 +5,7 @@ so stop the instance when not in use!
 
 1. Copy and customize contents of `varfile.example.json` for your personal
    setup.
+   - CUDA driver only worked on Kernel v4.
 2. Build the AMI via
    [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli):
    `$ packer build -var-file 'varfile.json' -only 'ami.*' . ` Take note of the

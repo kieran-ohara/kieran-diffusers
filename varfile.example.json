@@ -1,3 +1,6 @@
 {
-  "ssh_keypair_name": "your_keypair_name"
+  "region": "eu-west-2",
+  "source_ami": "ami-02a1ade676420a021",
+  "ssh_keypair_name": "your_keypair_name",
+  "ssh_username": "ec2-user"
 }
