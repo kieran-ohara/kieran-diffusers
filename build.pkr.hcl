@@ -45,13 +45,15 @@ build {
   }
 }
 
+variable "ssh_keypair_name" {}
+
 source "amazon-ebs" "g4dn" {
   ami_name      = "kieran-diffusers"
   instance_type = "g4dn.xlarge"
   region        = "eu-west-2"
   source_ami = "ami-084e8c05825742534"
   ssh_username = "ec2-user"
-  ssh_keypair_name = "kieranohara"
+  ssh_keypair_name = var.ssh_keypair_name
   ssh_agent_auth = true
   communicator         = "ssh"
 
