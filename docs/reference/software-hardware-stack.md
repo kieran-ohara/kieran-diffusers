@@ -1,9 +1,10 @@
-# Software Stack
+# Software/Hardware Stack
 
 ```mermaid
 graph TD;
-    gpu[NVIDIA GPU]
-    cuda[CUDA]
+
+    linux[Linux Kernel v4]
+    
 
     subgraph Inference
         model[Pretrained Model]
@@ -38,6 +39,12 @@ graph TD;
         instances --> train
         parameters --> train
     end
+    
+    subgraph NVIDIA
+        gpu[NVIDIA GPU]
+        cuda[CUDA]
+        linux_module[Linux Module nvidia.ko]
+    end
 
     train --> model
 
@@ -45,5 +52,7 @@ graph TD;
     diffusers_pipe --> diffusers
     diffusers --> pytorch
     pytorch --> cuda
-    cuda --> gpu
+    cuda --> linux_module
+    linux_module --> linux
+    linux --> gpu
 ```
