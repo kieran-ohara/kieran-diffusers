@@ -76,7 +76,6 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "HOME=/home/ec2-user",
       "ARCH=7.5"
     ]
     scripts = [
