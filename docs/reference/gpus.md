@@ -18,4 +18,5 @@ Comparing the different cloud providers re. cost.
 | Class | Price ($) | GPU              | GPU Memory (Gb) |
 | ----- | --------- | ---------------- | --------------- |
 | g4dn  | 0.41      | Nvidia Tensor T4 | 16              |
+| g4dn  | 0.76      | Nvidia Tensor T4 | 32              |
 | g4dn  | 1.64      | Nvidia Tensor T4 | 4x16            |

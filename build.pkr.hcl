@@ -4,6 +4,10 @@ packer {
       version = ">= 0.0.7"
       source  = "github.com/hashicorp/docker"
     }
+    googlecompute = {
+      version = ">= 0.0.1"
+      source  = "github.com/hashicorp/googlecompute"
+    }
   }
 }
 
@@ -67,11 +71,29 @@ source "amazon-ebs" "g4dn" {
   }
 }
 
+variable "gcp_project_id" {}
+variable "gcp_source_image_family" {}
+variable "gcp_ssh_username" {}
+variable "gcp_zone" {}
+
+source "googlecompute" "n1" {
+  project_id          = var.gcp_project_id
+  source_image_family = var.gcp_source_image_family
+  ssh_username        = var.gcp_ssh_username
+  zone                = var.gcp_zone
+  /* machine_type = "e2-standard-2" */
+  on_host_maintenance = "TERMINATE"
+  accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
+  accelerator_count   = 1
+  disk_size = 48
+}
+
 build {
-  name = "ami"
+  name = "rhel7_vm"
 
   sources = [
-    "source.amazon-ebs.g4dn"
+    "source.amazon-ebs.g4dn",
+    "source.googlecompute.n1"
   ]
 
   provisioner "shell" {
