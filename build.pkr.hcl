@@ -79,8 +79,8 @@ build {
       "ARCH=7.5"
     ]
     scripts = [
-      "./scripts/cuda.sh",
       "./scripts/utils.sh",
+      "./scripts/cuda.sh",
       "./scripts/conda-env.sh",
       "./scripts/xformers.sh",
       "./scripts/source-code.sh"
