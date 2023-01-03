@@ -30,4 +30,4 @@ if __name__ == "__main__":
         )
 
         grid = util.image_grid(images.images, len(prompts), num_images_per_prompt)
-        grid.save(f'{util.output_path(args.model)}/image_{args.prompts}.png')
+        grid.save(f'{util.output_path(args.model)}/{args.model}_{args.prompts}.png')
