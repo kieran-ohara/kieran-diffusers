@@ -12,3 +12,4 @@ model
 output
 scripts/prov-compare.sh
 varfile.json
+mlflow/outputs
