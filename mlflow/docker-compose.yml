@@ -8,3 +8,6 @@ services:
     ports:
       - 5001:5000
     # entrypoint: /bin/bash
+    volumes:
+      - ./:/data
+    working_dir: /data
