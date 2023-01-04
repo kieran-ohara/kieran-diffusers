@@ -1,9 +1,11 @@
 import os
 from random import random, randint
 
-from mlflow import log_metric, log_param, log_artifacts
+from mlflow import log_metric, log_param, log_artifacts, set_tracking_uri, set_experiment
 
 if __name__ == "__main__":
+    set_tracking_uri('http://localhost:5000')
+    set_experiment("my-experiment")
     print("Running mlflow_tracking.py")
 
     log_param("param1", randint(0, 100))
