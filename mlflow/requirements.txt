@@ -1,1 +1,4 @@
 mlflow
+awscli
+boto3==1.24.10
+mysqlclient
