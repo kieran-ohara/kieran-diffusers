@@ -25,6 +25,17 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+provider "aws" {
+  alias = "us_east_1"
+  region = "us-east-1"
+}
+
+
+resource "aws_ecrpublic_repository" "ecr-repo-mlflow" {
+  provider = aws.us_east_1
+  repository_name = "kieran-diffusers-mlflow"
+}
+
 resource "aws_s3_bucket" "bucket" {
   tags = {
     app = "kieran-diffusers"
