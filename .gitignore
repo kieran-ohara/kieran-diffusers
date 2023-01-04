@@ -6,5 +6,11 @@ cdk.out
 data
 model
 output
+<<<<<<< Updated upstream
 scripts/prov-compare.sh
 varfile.json
+=======
+Session.vim
+.terraform.lock.hcl
+.terraform
+>>>>>>> Stashed changes
