@@ -108,8 +108,5 @@ export default class StableDiffusion extends cdk.Stack {
 
     const bucket = new s3.Bucket(this, "bucket");
     bucket.grantReadWrite(instance.role);
-
-    const repository = new ecr.Repository(this, 'Repository');
-    repository.grantPullPush(instance.role);
   }
 }
