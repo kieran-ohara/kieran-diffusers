@@ -52,13 +52,20 @@ resource "aws_iam_policy" "user-policy" {
     Statement = [
       {
         Action = [
-          "s3:Get*",
-          "s3:List*",
-          "s3:Put*",
+          "s3:ListBucket",
         ]
         Effect   = "Allow"
-        Resource = aws_s3_bucket.bucket.arn
-      }
+        Resource = "${aws_s3_bucket.bucket.arn}"
+      },
+      {
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject",
+        ]
+        Effect   = "Allow"
+        Resource = "${aws_s3_bucket.bucket.arn}/*"
+      },
     ]
   })
 
