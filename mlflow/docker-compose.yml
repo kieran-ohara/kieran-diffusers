@@ -1,7 +1,8 @@
+---
 version: '3'
 services:
   mlflow:
-    image: public.ecr.aws/b1h6u3t2/kieran-diffusers-mlflow:latest
+    image: public.ecr.aws/b1h6u3t2/kieran-diffusers-mlflow:1
     build:
       context: .
     env_file:
@@ -13,3 +14,4 @@ services:
     volumes:
       - ./:/data
     working_dir: /data
+    platform: linux/amd64

@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: mlflow
+  name: mlflow-deployment
+  namespace: kieran-diffusers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mlflow
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        name: mlflow
+    spec:
+      containers:
+        - name: mlflow
+          image: public.ecr.aws/b1h6u3t2/kieran-diffusers-mlflow:1
+          ports:
+            - containerPort: 5000
+          env:
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: user-secret
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: user-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: DB_PASSWORD
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: DB_PORT
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: DB_DATABASE
+            - name: S3_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: S3_BUCKET
+          resources:
+            limits:
+              # memory: "10Mi"
+              # cpu: 0.002
+            requests:
+              memory: "10Mi"
+              cpu: 0.002
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow-service
+  namespace: kieran-diffusers
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+  selector:
+    name: mlflow
