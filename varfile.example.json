@@ -1,9 +1,6 @@
 {
-  "gcp_machine_type": "n1-standard-1",
   "gcp_project_id": "your_project",
-  "gcp_source_image_family": "centos-7",
   "gcp_ssh_username": "your_ssh_username",
-  "gcp_zone": "europe-west2-a",
   "region": "eu-west-2",
   "source_ami": "ami-02a1ade676420a021",
   "ssh_keypair_name": "your_keypair_name",

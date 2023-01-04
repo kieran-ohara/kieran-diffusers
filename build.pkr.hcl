@@ -72,20 +72,31 @@ source "amazon-ebs" "g4dn" {
 }
 
 variable "gcp_project_id" {}
-variable "gcp_source_image_family" {}
 variable "gcp_ssh_username" {}
-variable "gcp_zone" {}
+
+variable "gcp_source_image_family" {
+  type    = string
+  default = "centos-7"
+}
+variable "gcp_zone" {
+  type    = string
+  default = "asia-east1-a"
+}
+variable "gcp_machine_type" {
+  type    = string
+  default = "n1-standard-1"
+}
 
 source "googlecompute" "n1" {
   project_id          = var.gcp_project_id
   source_image_family = var.gcp_source_image_family
   ssh_username        = var.gcp_ssh_username
   zone                = var.gcp_zone
-  /* machine_type = "e2-standard-2" */
+  machine_type        = var.gcp_machine_type
   on_host_maintenance = "TERMINATE"
   accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
   accelerator_count   = 1
-  disk_size = 48
+  disk_size           = 48
 }
 
 build {
