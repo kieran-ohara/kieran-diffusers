@@ -104,3 +104,13 @@ resource "kubernetes_secret_v1" "user-secret" {
     "AWS_SECRET_ACCESS_KEY" = aws_iam_access_key.user-key.secret
   }
 }
+
+resource "kubernetes_config_map" "config" {
+  metadata {
+    name      = "config"
+    namespace = var.namespace
+  }
+  data = {
+    S3_BUCKET = aws_s3_bucket.bucket.bucket
+  }
+}
