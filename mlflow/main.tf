@@ -26,13 +26,13 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias = "us_east_1"
+  alias  = "us_east_1"
   region = "us-east-1"
 }
 
 
 resource "aws_ecrpublic_repository" "ecr-repo-mlflow" {
-  provider = aws.us_east_1
+  provider        = aws.us_east_1
   repository_name = "kieran-diffusers-mlflow"
 }
 
