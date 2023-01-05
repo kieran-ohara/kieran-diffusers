@@ -1,8 +1,5 @@
 {
+  "aws_ssh_keypair_name": "your_keypair_name",
   "gcp_project_id": "your_project",
-  "gcp_ssh_username": "your_ssh_username",
-  "region": "eu-west-2",
-  "source_ami": "ami-02a1ade676420a021",
-  "ssh_keypair_name": "your_keypair_name",
-  "ssh_username": "ec2-user",
+  "gcp_ssh_username": "your_ssh_username"
 }

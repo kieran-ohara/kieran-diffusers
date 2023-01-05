@@ -9,9 +9,9 @@ so stop the instance when not in use!
 2. Build the AMI via
    [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli):
    - For GCP, use
-     `$ packer build -var-file 'varfile.json' -only 'rhel7_vm.googlecompute.*' .`
+     `$ packer build -var-file 'varfile.json' -only 'centos7.googlecompute.*' .`
    - For AWS, use
-     `$ packer build -var-file 'varfile.json' -only 'rhel7_vm.amazon-ebs.*' .`
+     `$ packer build -var-file 'varfile.json' -only 'centos7.amazon-ebs.*' .`
      Take note of the AMI ID that is created.
 3. Set the value of `context.euWestAMI` in `./cdk.json` to the AMI ID from
    previous step.

@@ -49,18 +49,32 @@ build {
   }
 }
 
-variable "region" {}
-variable "source_ami" {}
-variable "ssh_keypair_name" {}
-variable "ssh_username" {}
+variable "aws_ssh_keypair_name" {}
 
-source "amazon-ebs" "g4dn" {
+variable "aws_instance_type" {
+  type    = string
+  default = "g4dn.xlarge"
+}
+variable "aws_region" {
+  type    = string
+  default = "eu-west-2"
+}
+variable "aws_source_ami" {
+  type    = string
+  default = "ami-036e229aa5fa198ba"
+}
+variable "aws_ssh_username" {
+  type    = string
+  default = "centos"
+}
+
+source "amazon-ebs" "sd" {
   ami_name         = "kieran-diffusers"
-  instance_type    = "g4dn.xlarge"
-  region           = var.region
-  source_ami       = var.source_ami
-  ssh_username     = var.ssh_username
-  ssh_keypair_name = var.ssh_keypair_name
+  instance_type    = var.aws_instance_type
+  region           = var.aws_region
+  source_ami       = var.aws_source_ami
+  ssh_username     = var.aws_ssh_username
+  ssh_keypair_name = var.aws_ssh_keypair_name
   ssh_agent_auth   = true
   communicator     = "ssh"
 
@@ -87,7 +101,7 @@ variable "gcp_machine_type" {
   default = "n1-standard-1"
 }
 
-source "googlecompute" "n1" {
+source "googlecompute" "sd" {
   project_id          = var.gcp_project_id
   source_image_family = var.gcp_source_image_family
   ssh_username        = var.gcp_ssh_username
@@ -100,11 +114,11 @@ source "googlecompute" "n1" {
 }
 
 build {
-  name = "rhel7_vm"
+  name = "centos7"
 
   sources = [
-    "source.amazon-ebs.g4dn",
-    "source.googlecompute.n1"
+    "source.amazon-ebs.sd",
+    "source.googlecompute.sd"
   ]
 
   provisioner "shell" {
