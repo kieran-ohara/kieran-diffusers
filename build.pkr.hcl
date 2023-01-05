@@ -80,7 +80,7 @@ source "amazon-ebs" "sd" {
 
   launch_block_device_mappings {
     device_name = "/dev/xvda"
-    volume_size = "48"
+    volume_size = "60"
     volume_type = "gp2"
   }
 }
@@ -110,7 +110,7 @@ source "googlecompute" "sd" {
   on_host_maintenance = "TERMINATE"
   accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
   accelerator_count   = 1
-  disk_size           = 48
+  disk_size           = 60
 }
 
 build {
