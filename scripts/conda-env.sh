@@ -1,7 +1,6 @@
 #!/bin/bash -xe
 
 # Conda
-sudo yum install -y libXcomposite libXcursor libXi libXtst libXrandr alsa-lib mesa-libEGL libXdamage mesa-libGL libXScrnSaver
 curl -L https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh -o install-conda.sh
 chmod 755 install-conda.sh
 ./install-conda.sh -bu
