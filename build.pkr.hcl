@@ -93,6 +93,7 @@ build {
       "./scripts/prep-conda.sh",
       "./scripts/conda-env.sh",
       "./scripts/xformers.sh",
+      "./scripts/build-xformers-centos7.sh",
       "./scripts/source-code.sh"
     ]
   }
