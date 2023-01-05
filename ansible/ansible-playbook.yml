@@ -1,0 +1,4 @@
+---
+- hosts: rockylinux8
+  roles:
+    - stable-diffusion

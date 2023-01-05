@@ -1,0 +1,53 @@
+---
+- name: Install Utils
+  package:
+    name:
+      - git
+      - tmux
+      - pciutils
+    state: latest
+  become: true
+  tags:
+    - utils
+
+- name: Add CUDA repository
+  yum_repository:
+    name: nvidia-cuda
+    description: nvidia-cuda
+    baseurl: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64
+    gpgcheck: true
+    enabled: true
+    gpgkey: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/D42D0685.pub
+  become: true
+  tags:
+    - cuda-repo
+
+- name: Install CUDAs
+  package:
+    name:
+      - epel-release
+      - nvidia-driver
+      - cuda-11.7.1-1
+      - cuda-driver
+    state: latest
+  become: true
+  tags:
+    - cuda
+
+- name: Conda prereqs
+  package:
+    name:
+      - libXcomposite
+      - libXcursor
+      - libXi
+      - libXtst
+      - libXrandr
+      - alsa-lib
+      - mesa-libEGL
+      - libXdamage
+      - mesa-libGL
+      - libXScrnSaver
+    state: latest
+  become: true
+  tags:
+    - conda

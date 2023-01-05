@@ -12,7 +12,6 @@ packer {
 }
 
 variable "aws_ssh_keypair_name" {}
-
 variable "aws_instance_type" {
   type    = string
   default = "g4dn.xlarge"
@@ -30,7 +29,7 @@ variable "aws_ssh_username" {
   default = "centos"
 }
 
-source "amazon-ebs" "sd" {
+source "amazon-ebs" "centos7" {
   ami_name         = "kieran-diffusers"
   instance_type    = var.aws_instance_type
   region           = var.aws_region
@@ -49,11 +48,6 @@ source "amazon-ebs" "sd" {
 
 variable "gcp_project_id" {}
 variable "gcp_ssh_username" {}
-
-variable "gcp_source_image_family" {
-  type    = string
-  default = "centos-7"
-}
 variable "gcp_zone" {
   type    = string
   default = "asia-east1-a"
@@ -63,39 +57,77 @@ variable "gcp_machine_type" {
   default = "n1-standard-1"
 }
 
-source "googlecompute" "sd" {
+source "googlecompute" "rockylinux8" {
   project_id          = var.gcp_project_id
-  source_image_family = var.gcp_source_image_family
+  source_image_family = "rocky-linux-8"
   ssh_username        = var.gcp_ssh_username
   zone                = var.gcp_zone
   machine_type        = var.gcp_machine_type
   on_host_maintenance = "TERMINATE"
   accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
   accelerator_count   = 1
-  disk_size           = 48
+  disk_size = 48
+}
+
+source "googlecompute" "centos7" {
+  project_id          = var.gcp_project_id
+  source_image_family = "centos-7"
+  ssh_username        = var.gcp_ssh_username
+  zone                = var.gcp_zone
+  machine_type        = var.gcp_machine_type
+  on_host_maintenance = "TERMINATE"
+  accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
+  accelerator_count   = 1
+  disk_size = 48
 }
 
 build {
-  name = "centos7"
+  name = "sd"
 
   sources = [
-    "source.amazon-ebs.sd",
-    "source.googlecompute.sd"
+    "source.amazon-ebs.centos7",
+    "source.googlecompute.rockylinux8",
+    "source.googlecompute.centos7"
   ]
+
+  provisioner "ansible" {
+    host_alias    = source.name
+    playbook_file = "./ansible/ansible-playbook.yml"
+    use_proxy     = false
+    only          = ["googlecompute.rockylinux8"]
+  }
+
+  provisioner "shell" {
+    scripts = [
+      "./scripts/utils.sh",
+      "./scripts/cuda.sh",
+      "./scripts/prep-conda.sh",
+    ]
+    only = [
+      "amazon-ebs.centos7",
+      "googlecompute.centos7"
+    ]
+  }
+
+  provisioner "shell" {
+    scripts = [
+      "./scripts/alacritty.sh",
+      "./scripts/conda-env.sh",
+      "./scripts/xformers.sh",
+      "./scripts/source-code.sh"
+    ]
+  }
 
   provisioner "shell" {
     environment_vars = [
       "ARCH=7.5"
     ]
     scripts = [
-      "./scripts/alacritty.sh",
-      "./scripts/utils.sh",
-      "./scripts/cuda.sh",
-      "./scripts/prep-conda.sh",
-      "./scripts/conda-env.sh",
-      "./scripts/xformers.sh",
-      "./scripts/build-xformers-centos7.sh",
-      "./scripts/source-code.sh"
+      "./scripts/build-xformers-centos7.sh"
+    ]
+    only = [
+      "amazon-ebs.centos7",
+      "googlecompute.centos7"
     ]
   }
 }
