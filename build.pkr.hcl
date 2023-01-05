@@ -11,44 +11,6 @@ packer {
   }
 }
 
-source "docker" "base" {
-  image    = "nvidia/cuda:11.7.1-base-rockylinux8"
-  commit   = true
-  platform = "linux/amd64"
-}
-
-build {
-  name = "pack"
-
-  sources = [
-    "source.docker.base"
-  ]
-
-  provisioner "shell" {
-    inline = [
-      "yum install -y sudo which",
-    ]
-  }
-
-  provisioner "shell" {
-    environment_vars = [
-      "HOME=/root",
-      "ARCH=7.5"
-    ]
-    scripts = [
-      "./scripts/utils.sh",
-      "./scripts/conda-env.sh",
-      "./scripts/xformers.sh",
-      "./scripts/source-code.sh"
-    ]
-  }
-
-  post-processor "docker-tag" {
-    repository = "kieran-diffusers"
-    tags       = ["latest"]
-  }
-}
-
 variable "aws_ssh_keypair_name" {}
 
 variable "aws_instance_type" {
