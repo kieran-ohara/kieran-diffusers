@@ -90,6 +90,7 @@ build {
     scripts = [
       "./scripts/utils.sh",
       "./scripts/cuda.sh",
+      "./scripts/prep-conda.sh",
       "./scripts/conda-env.sh",
       "./scripts/xformers.sh",
       "./scripts/source-code.sh"
