@@ -15,11 +15,14 @@ Comparing the different cloud providers re. cost.
 
 ## GCP
 
-| Class         | region       | Price ($ ph) | GPU              | GPU Memory (Gb) |
-| ------------- | ------------ | ------------ | ---------------- | --------------- |
-| n1-standard-1 | europe-west2 | 0.34         | Nvidia Tensor T4 | 16              |
-| n1-standard-1 | europe-west2 | 0.62         | Nvidia Tensor T4 | 2x16            |
-| n1-standard-1 | europe-west2 | 1.20         | Nvidia Tensor T4 | 4x16            |
-| n1-standard-1 | asia-east1   | 0.29         | Nvidia Tensor T4 | 2x16            |
-| n1-standard-1 | asia-east1   | 0.54         | Nvidia Tensor T4 | 2x16            |
-| n1-standard-1 | asia-east1   | 1.03         | Nvidia Tensor T4 | 4x16            |
+| Class         | region       | Price ($ ph) | GPU              | GPU Memory (Gb) | Memory (Gb) |
+| ------------- | ------------ | ------------ | ---------------- | --------------- | ----------- |
+| n1-standard-1 | europe-west2 | 0.34         | Nvidia Tensor T4 | 16              | 3.75        |
+| n1-standard-1 | europe-west2 | 0.62         | Nvidia Tensor T4 | 2x16            | 3.75        |
+| n1-standard-1 | europe-west2 | 1.20         | Nvidia Tensor T4 | 4x16            | 3.75        |
+| n1-standard-1 | asia-east1   | 0.29         | Nvidia Tensor T4 | 2x16            | 3.75        |
+| n1-standard-1 | asia-east1   | 0.54         | Nvidia Tensor T4 | 2x16            | 3.75        |
+| n1-standard-1 | asia-east1   | 1.03         | Nvidia Tensor T4 | 4x16            | 3.75        |
+| n1-standard-4 | asia-east1   | 0.41         | Nvidia Tensor T4 | 16              | 15          |
+| n1-standard-4 | us-central1  | 0.38         | Nvidia Tensor T4 | 16              | 15          |
+| n1-standard-4 | us-central1  | 0.63         | Nvidia Tensor T4 | 2x16            | 15          |
