@@ -77,3 +77,54 @@
   tags:
     - awscli
 
+- name: Install Python
+  package:
+    name:
+      - python39
+      - python39-pip
+      - python39-devel
+    state: latest
+  become: true
+  tags:
+    - python
+
+- name: Install libgit deps
+  package:
+    name:
+      - cmake
+    state: present
+  become: true
+  tags:
+    - libgit
+
+- name: Get libgit
+  unarchive:
+    src: https://github.com/libgit2/libgit2/archive/refs/tags/v1.5.0.tar.gz
+    dest: /tmp
+    remote_src: true
+  become: true
+  tags:
+    - libgit
+    - this
+
+- name: Install libgit
+  shell:
+    cmd: |
+      cmake .
+      make
+      make install
+  args:
+    chdir: /tmp/libgit2-1.5.0
+    creates: /usr/local/lib64/libgit2.so
+  become: true
+  tags:
+    - libgit
+
+- name: Install DVC
+  pip:
+    name:
+      - dvc
+      - dvc-s3
+    executable: /usr/bin/pip3.9
+  tags:
+    - dvc
