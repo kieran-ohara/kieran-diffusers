@@ -130,4 +130,14 @@ build {
       "googlecompute.centos7"
     ]
   }
+
+  provisioner "shell" {
+    environment_vars = [
+      "ARCH=7.5"
+    ]
+    scripts = [
+      "./scripts/build-xformers.sh"
+    ]
+    only = ["googlecompute.rockylinux8"]
+  }
 }
