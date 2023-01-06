@@ -22,7 +22,7 @@
   tags:
     - cuda-repo
 
-- name: Install CUDAs
+- name: Install CUDA
   package:
     name:
       - epel-release
