@@ -66,7 +66,7 @@ source "googlecompute" "rockylinux8" {
   on_host_maintenance = "TERMINATE"
   accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
   accelerator_count   = 1
-  disk_size = 48
+  disk_size           = 48
 }
 
 source "googlecompute" "centos7" {
@@ -78,7 +78,7 @@ source "googlecompute" "centos7" {
   on_host_maintenance = "TERMINATE"
   accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
   accelerator_count   = 1
-  disk_size = 48
+  disk_size           = 48
 }
 
 build {
