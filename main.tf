@@ -1,5 +1,9 @@
 terraform {
   required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
     google = {
       source = "hashicorp/google"
       version = "4.47.0"
@@ -10,6 +14,57 @@ terraform {
     key    = "apps/terraform/kieran-diffusers-main"
     region = "eu-west-2"
   }
+}
+
+resource "aws_s3_bucket" "bucket" {
+  bucket = "kieran-diffusers-dvc"
+  tags = {
+    app = "kieran-diffusers"
+  }
+}
+
+resource "aws_iam_policy" "user-policy" {
+  name        = "dvc-policy"
+  path        = "/kieran-diffusers/"
+  description = "Policy for kieran-diffusers"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "s3:ListBucket",
+        ]
+        Effect   = "Allow"
+        Resource = "${aws_s3_bucket.bucket.arn}"
+      },
+      {
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject",
+        ]
+        Effect   = "Allow"
+        Resource = "${aws_s3_bucket.bucket.arn}/*"
+      },
+    ]
+  })
+  tags = {
+    app = "kieran-diffusers"
+  }
+}
+
+resource "aws_iam_user" "user" {
+  path = "/kieran-diffusers/"
+  name = "kieran-diffuser-user"
+  tags = {
+    app = "kieran-diffusers"
+  }
+}
+
+resource "aws_iam_user_policy_attachment" "user-key-attach" {
+  user       = aws_iam_user.user.name
+  policy_arn = aws_iam_policy.user-policy.arn
 }
 
 provider "google" {

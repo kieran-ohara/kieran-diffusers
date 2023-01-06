@@ -1,0 +1,4 @@
+[core]
+    remote = diffusers
+['remote "diffusers"']
+    url = s3://kieran-diffusers-dvc
