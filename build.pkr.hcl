@@ -50,7 +50,7 @@ variable "gcp_project_id" {}
 variable "gcp_ssh_username" {}
 variable "gcp_zone" {
   type    = string
-  default = "asia-east1-a"
+  default = "us-central1-a"
 }
 variable "gcp_machine_type" {
   type    = string
