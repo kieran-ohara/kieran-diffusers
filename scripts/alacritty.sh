@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -e
 
 # Or else I have to use Terminal.app.
 cd ~/

@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -e
 
 # 8.6 for A10, 7.5 for T4. This can take some time.
 # see https://developer.nvidia.com/cuda-gpus

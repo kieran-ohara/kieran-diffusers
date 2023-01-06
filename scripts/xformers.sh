@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -e
 eval "$(/"${HOME}"/anaconda3/bin/conda shell.bash hook)"
 source "/"${HOME}"/anaconda3/etc/profile.d/conda.sh"
 conda activate sd
