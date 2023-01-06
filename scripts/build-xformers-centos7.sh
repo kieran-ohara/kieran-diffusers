@@ -8,5 +8,6 @@ then
       return 1
 fi
 
+cd ~/src/xformers
 source /opt/rh/devtoolset-7/enable
 CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=$ARCH pip install -e .
