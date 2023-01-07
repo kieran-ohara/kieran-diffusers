@@ -76,13 +76,3 @@
   become: true
   tags:
     - user
-
-- name: kieran-diffusers
-  ansible.builtin.git:
-    repo: https://github.com/kieran-ohara/kieran-diffusers.git
-    dest: "/home/{{ username }}/kieran-diffusers"
-  become: true
-  become_user: "{{ username }}"
-  tags:
-    - user
-

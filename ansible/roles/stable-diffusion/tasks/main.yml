@@ -1,22 +1,31 @@
 ---
-- name: Get xformers
-  ansible.builtin.git:
-    repo: https://github.com/facebookresearch/xformers.git
-    dest: "/tmp/xformers"
+- name: kieran-diffusers
+  git:
+    repo: https://github.com/kieran-ohara/kieran-diffusers.git
+    dest: "/home/{{ username }}/kieran-diffusers"
     recursive: yes
   become: true
   become_user: "{{ username }}"
   tags:
     - sd
 
-- name: SD Conda Env
-  copy:
-    src: ./home/sd.yml
-    dest: "/home/{{ username }}/sd.yml"
-    owner: "{{ username }}"
-    group: wheel
+- name: Install SD Conda Env
+  shell:
+    cmd: |
+      source /opt/conda/etc/profile.d/conda.sh
+      conda env create --file sd.yml
   become: true
-  tags:
-    - sd
-  notify:
-    - Install SD Conda Env
+  become_user: "{{ username }}"
+  args:
+    chdir: "/home/{{ username }}/kieran-diffusers"
+
+- name: Install xformers - THIS TAKES A LONG TIME!
+  shell:
+    cmd: |
+      source /opt/conda/etc/profile.d/conda.sh
+      conda activate sd
+      CUDA_HOME=/usr/local/cuda TORCH_CUDA_ARCH_LIST=7.5 pip install -e .
+  become: true
+  become_user: "{{ username }}"
+  args:
+    chdir: "/home/{{ username }}/kieran-diffusers/submodules/xformers"
