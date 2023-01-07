@@ -1,3 +1,6 @@
 [submodule "diffusers"]
 	path = submodules/diffusers
 	url = https://github.com/ShivamShrirao/diffusers
+[submodule "xformers"]
+	path = submodules/xformers
+	url = https://github.com/facebookresearch/xformers.git
