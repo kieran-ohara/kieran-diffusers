@@ -1,0 +1,24 @@
+name: sd
+channels:
+  - pytorch
+  - nvidia
+dependencies:
+  # Copied from PyTorch
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.7
+  - pip
+  - pip:
+    # Copied from diffusers fork ipynb
+    - bitsandbytes==0.35.0
+    - gradio
+    - natsort
+    - triton
+    # Install submodules
+    - -e submodules/diffusers
+    - -r submodules/diffusers/examples/dreambooth/requirements.txt
+    - -r submodules/xformers/requirements.txt
+    # Needs to be executed somewhere the CUDA_HOME/TORCH_CUDA_ARCH_LIST vars are set, annoyingly
+    # - -e submodules/xformers
