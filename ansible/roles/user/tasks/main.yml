@@ -66,7 +66,7 @@
 
 - name: Authorize User.
   authorized_key:
-    key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDll2FdMlwzcVeW+9ETDoLf4+VIbzXjS7pUvQ3++p13qWc7jQGdBRTklWMWm1BrdoSMHwxxiwVGZmiR5d0IeCYi/quZsk2NKa0B4W3CTleQ9GD032oRrIZ/VcwiyiQpjAJRH7TsYsPUmQNYp/vglCr7qfcTwqTbyJqq61l1poCcY2rnMncmoSgw5jd14pfZ1lboKvjAVQqdI26ihcqSjR5sgG1AIcD8GrfQ3zG8c1t0gyex+ZWDJs76Buu/6HiX9J23wCC9qU2ePuCdgkpFlcviZbLVOfpaNphFlAB9ewtvsqXKcQf7cxmYqVyBbE7sjjqh9EU57aqlFoXOC1eitii9 kieranbamforth'
+    key: "{{ ansible_public_ssh_key }}"
     user: "{{ username }}"
   become: true
   become_user: "{{ username }}"

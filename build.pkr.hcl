@@ -82,6 +82,9 @@ build {
     playbook_file = "./ansible/ansible-playbook.yml"
     use_proxy     = false
     only          = ["googlecompute.rockylinux8"]
+    extra_arguments = [
+      "--extra-vars", "@varfile.json"
+    ]
   }
 
   provisioner "shell" {

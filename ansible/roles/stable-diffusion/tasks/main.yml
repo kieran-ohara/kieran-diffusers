@@ -18,6 +18,5 @@
   become: true
   tags:
     - sd
-    - this
   notify:
     - Install SD Conda Env
