@@ -23,6 +23,28 @@ resource "aws_s3_bucket" "bucket" {
   }
 }
 
+resource "aws_s3_bucket_policy" "policy" {
+  bucket = aws_s3_bucket.bucket.id
+  policy = data.aws_iam_policy_document.bucketpolicy.json
+}
+
+data "aws_iam_policy_document" "bucketpolicy" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.bucket.arn}/*",
+    ]
+  }
+}
+
 resource "aws_iam_policy" "user-policy" {
   name        = "dvc-policy"
   path        = "/kieran-diffusers/"
