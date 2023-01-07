@@ -14,7 +14,7 @@ packer {
 variable "aws_ssh_keypair_name" {}
 variable "aws_instance_type" {
   type    = string
-  default = "g4dn.xlarge"
+  default = "t3.medium"
 }
 variable "aws_region" {
   type    = string
@@ -22,14 +22,14 @@ variable "aws_region" {
 }
 variable "aws_source_ami" {
   type    = string
-  default = "ami-036e229aa5fa198ba"
+  default = "ami-0a60ec4cf115fa6cf"
 }
 variable "aws_ssh_username" {
   type    = string
   default = "centos"
 }
 
-source "amazon-ebs" "centos7" {
+source "amazon-ebs" "rockylinux8" {
   ami_name         = "kieran-diffusers"
   instance_type    = var.aws_instance_type
   region           = var.aws_region
@@ -73,7 +73,7 @@ build {
   name = "sd"
 
   sources = [
-    "source.amazon-ebs.centos7",
+    "source.amazon-ebs.rockylinux8",
     "source.googlecompute.rockylinux8",
   ]
 
@@ -84,25 +84,6 @@ build {
     only          = ["googlecompute.rockylinux8"]
     extra_arguments = [
       "--extra-vars", "@varfile.json"
-    ]
-  }
-
-  provisioner "shell" {
-    environment_vars = [
-      "ARCH=7.5"
-    ]
-    scripts = [
-      "./scripts/alacritty.sh",
-      "./scripts/utils.sh",
-      "./scripts/cuda.sh",
-      "./scripts/prep-conda.sh",
-      "./scripts/conda-env.sh",
-      "./scripts/xformers.sh",
-      "./scripts/source-code.sh",
-      "./scripts/build-xformers-centos7.sh"
-    ]
-    only = [
-      "amazon-ebs.centos7",
     ]
   }
 }
