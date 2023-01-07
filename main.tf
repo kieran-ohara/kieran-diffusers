@@ -98,19 +98,19 @@ variable "gcp_instance_image" {
   type    = string
   default = "rocky-linux-8"
 }
-variable "gcp_instance_machine_type" {
+variable "gcp_machine_type" {
   type    = string
   default = "n1-standard-1"
 }
-variable "gcp_instance_zone" {
+variable "gcp_zone" {
   type    = string
   default = "us-central1-a"
 }
 
 resource "google_compute_instance" "default" {
   name         = "test"
-  machine_type = var.gcp_instance_machine_type
-  zone         = var.gcp_instance_zone
+  machine_type = var.gcp_machine_type
+  zone         = var.gcp_zone
 
   boot_disk {
     initialize_params {
@@ -123,7 +123,6 @@ resource "google_compute_instance" "default" {
     type  = "nvidia-tesla-t4"
     count = 1
   }
-
   scheduling {
     on_host_maintenance = "TERMINATE"
   }
