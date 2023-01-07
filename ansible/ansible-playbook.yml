@@ -3,5 +3,6 @@
   roles:
     - dvc
     - stable-diffusion
+    - nvtop
   vars:
     username: sd
