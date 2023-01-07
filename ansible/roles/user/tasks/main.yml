@@ -4,6 +4,7 @@
     name:
       - tmux
       - pciutils
+      - ncdu
     state: latest
   become: true
   tags:
