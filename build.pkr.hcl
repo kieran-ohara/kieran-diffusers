@@ -63,9 +63,9 @@ source "googlecompute" "rockylinux8" {
   ssh_username        = var.gcp_ssh_username
   zone                = var.gcp_zone
   machine_type        = var.gcp_machine_type
-  on_host_maintenance = "TERMINATE"
-  accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
-  accelerator_count   = 1
+  /* on_host_maintenance = "TERMINATE" */
+  /* accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4" */
+  /* accelerator_count   = 1 */
   disk_size           = 48
 }
 
