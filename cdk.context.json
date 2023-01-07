@@ -1,8 +1,0 @@
-{
-  "availability-zones:account=855277617897:region=eu-west-2": [
-    "eu-west-2a",
-    "eu-west-2b",
-    "eu-west-2c"
-  ],
-  "ami:account=855277617897:filters.image-type.0=machine:filters.name.0=Deep Learning AMI GPU PyTorch 1.12.1 (Amazon Linux 2) 20221114:filters.state.0=available:owners.0=amazon:region=eu-west-1": "ami-04b858fbca1e50d29"
-}
