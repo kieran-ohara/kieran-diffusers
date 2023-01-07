@@ -115,6 +115,7 @@ resource "google_compute_instance" "default" {
   boot_disk {
     initialize_params {
       image = var.gcp_instance_image
+      size = 48
     }
   }
 
