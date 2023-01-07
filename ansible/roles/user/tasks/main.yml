@@ -1,0 +1,85 @@
+---
+- name: Install Utils
+  package:
+    name:
+      - tmux
+      - pciutils
+    state: latest
+  become: true
+  tags:
+    - user
+
+- name: Get Alacritty Terminfo
+  get_url:
+    url: https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
+    dest: /tmp
+  tags:
+    - user
+
+- name: Install Alacritty Terminfo
+  command: tic -xe alacritty,alacritty-direct alacritty.info
+  args:
+    chdir: /tmp
+    creates: /usr/share/terminfo/a/alacritty
+  become: true
+  tags:
+    - user
+
+- name: kieran-diffusers
+  ansible.builtin.git:
+    repo: https://github.com/kieran-ohara/kieran-diffusers.git
+    dest: "{{ ansible_env.HOME }}/kieran-diffusers"
+  tags:
+    - user
+
+
+- name: Ensure wheel group exists
+  ansible.builtin.group:
+    name: wheel
+    state: present
+  tags:
+    - user
+
+- name: Create user.
+  user:
+    name: "{{ username }}"
+    groups:
+      - wheel
+    home: "/home/{{ username }}"
+    shell: /bin/sh
+    password: '*'
+  become: true
+  tags:
+    - user
+
+- name: Create User's home directory.
+  file:
+    owner: "{{ username }}"
+    group: wheel
+    state: directory
+    path: "{{ item }}"
+  loop:
+    - "/home/{{username}}"
+  become: true
+  tags:
+    - user
+
+- name: Authorize User.
+  authorized_key:
+    key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDll2FdMlwzcVeW+9ETDoLf4+VIbzXjS7pUvQ3++p13qWc7jQGdBRTklWMWm1BrdoSMHwxxiwVGZmiR5d0IeCYi/quZsk2NKa0B4W3CTleQ9GD032oRrIZ/VcwiyiQpjAJRH7TsYsPUmQNYp/vglCr7qfcTwqTbyJqq61l1poCcY2rnMncmoSgw5jd14pfZ1lboKvjAVQqdI26ihcqSjR5sgG1AIcD8GrfQ3zG8c1t0gyex+ZWDJs76Buu/6HiX9J23wCC9qU2ePuCdgkpFlcviZbLVOfpaNphFlAB9ewtvsqXKcQf7cxmYqVyBbE7sjjqh9EU57aqlFoXOC1eitii9 kieranbamforth'
+    user: "{{ username }}"
+  become: true
+  become_user: "{{ username }}"
+  tags:
+    - user
+
+- name: Users Bashrc
+  copy:
+    src: home/bashrc
+    dest: "/home/{{username}}/.bashrc"
+    owner: "{{ username }}"
+    group: wheel
+    mode: 0755
+  become: true
+  tags:
+    - user

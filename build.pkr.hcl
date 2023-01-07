@@ -69,25 +69,12 @@ source "googlecompute" "rockylinux8" {
   disk_size           = 48
 }
 
-source "googlecompute" "centos7" {
-  project_id          = var.gcp_project_id
-  source_image_family = "centos-7"
-  ssh_username        = var.gcp_ssh_username
-  zone                = var.gcp_zone
-  machine_type        = var.gcp_machine_type
-  on_host_maintenance = "TERMINATE"
-  accelerator_type    = "projects/${var.gcp_project_id}/zones/${var.gcp_zone}/acceleratorTypes/nvidia-tesla-t4"
-  accelerator_count   = 1
-  disk_size           = 48
-}
-
 build {
   name = "sd"
 
   sources = [
     "source.amazon-ebs.centos7",
     "source.googlecompute.rockylinux8",
-    "source.googlecompute.centos7"
   ]
 
   provisioner "ansible" {
@@ -98,46 +85,21 @@ build {
   }
 
   provisioner "shell" {
-    scripts = [
-      "./scripts/utils.sh",
-      "./scripts/cuda.sh",
-      "./scripts/prep-conda.sh",
-    ]
-    only = [
-      "amazon-ebs.centos7",
-      "googlecompute.centos7"
-    ]
-  }
-
-  provisioner "shell" {
-    scripts = [
-      "./scripts/alacritty.sh",
-      "./scripts/conda-env.sh",
-      "./scripts/xformers.sh",
-      "./scripts/source-code.sh"
-    ]
-  }
-
-  provisioner "shell" {
     environment_vars = [
       "ARCH=7.5"
     ]
     scripts = [
+      "./scripts/alacritty.sh",
+      "./scripts/utils.sh",
+      "./scripts/cuda.sh",
+      "./scripts/prep-conda.sh",
+      "./scripts/conda-env.sh",
+      "./scripts/xformers.sh",
+      "./scripts/source-code.sh",
       "./scripts/build-xformers-centos7.sh"
     ]
     only = [
       "amazon-ebs.centos7",
-      "googlecompute.centos7"
     ]
-  }
-
-  provisioner "shell" {
-    environment_vars = [
-      "ARCH=7.5"
-    ]
-    scripts = [
-      "./scripts/build-xformers.sh"
-    ]
-    only = ["googlecompute.rockylinux8"]
   }
 }

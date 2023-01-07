@@ -1,130 +1,23 @@
 ---
-- name: Install Utils
-  package:
-    name:
-      - git
-      - tmux
-      - pciutils
-    state: latest
+- name: Get xformers
+  ansible.builtin.git:
+    repo: https://github.com/facebookresearch/xformers.git
+    dest: "/tmp/xformers"
+    recursive: yes
+  become: true
+  become_user: "{{ username }}"
+  tags:
+    - sd
+
+- name: SD Conda Env
+  copy:
+    src: ./home/sd.yml
+    dest: "/home/{{ username }}/sd.yml"
+    owner: "{{ username }}"
+    group: wheel
   become: true
   tags:
-    - utils
-
-- name: Add CUDA repository
-  yum_repository:
-    name: nvidia-cuda
-    description: nvidia-cuda
-    baseurl: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64
-    gpgcheck: true
-    enabled: true
-    gpgkey: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/D42D0685.pub
-  become: true
-  tags:
-    - cuda-repo
-
-- name: Install CUDA
-  package:
-    name:
-      - epel-release
-      - nvidia-driver
-      - cuda-11.7.1-1
-      - cuda-driver
-    state: latest
-  become: true
-  tags:
-    - cuda
-
-- name: Conda prereqs
-  package:
-    name:
-      - libXcomposite
-      - libXcursor
-      - libXi
-      - libXtst
-      - libXrandr
-      - alsa-lib
-      - mesa-libEGL
-      - libXdamage
-      - mesa-libGL
-      - libXScrnSaver
-    state: latest
-  become: true
-  tags:
-    - conda
-
-- name: AWS CLI prereqs
-  package:
-    name:
-      - unzip
-    state: latest
-  become: true
-  tags:
-    - awscli
-
-- name: Download AWSCLI Installer
-  unarchive:
-    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-    dest: /tmp
-    remote_src: true
-  tags:
-    - awscli
-
-- name: Install AWSCLI
-  command: /tmp/aws/install
-  args:
-    creates: /usr/local/aws-cli
-  become: true
-  tags:
-    - awscli
-
-- name: Install Python
-  package:
-    name:
-      - python39
-      - python39-pip
-      - python39-devel
-    state: latest
-  become: true
-  tags:
-    - python
-
-- name: Install libgit deps
-  package:
-    name:
-      - cmake
-      - openssl-devel
-    state: present
-  become: true
-  tags:
-    - libgit
-
-- name: Get libgit
-  unarchive:
-    src: https://github.com/libgit2/libgit2/archive/refs/tags/v1.5.0.tar.gz
-    dest: /tmp
-    remote_src: true
-  become: true
-  tags:
-    - libgit
-
-- name: Install libgit
-  shell:
-    cmd: |
-      cmake .
-      make
-      make install
-  args:
-    chdir: /tmp/libgit2-1.5.0
-    creates: /usr/local/lib64/libgit2.so
-  become: true
-  tags:
-    - libgit
-
-- name: Install DVC
-  pip:
-    name:
-      - dvc
-      - dvc-s3
-    executable: /usr/bin/pip3.9
-  tags:
-    - dvc
+    - sd
+    - this
+  notify:
+    - Install SD Conda Env

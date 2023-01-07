@@ -1,0 +1,29 @@
+name: sd
+variables:
+  CUDA_HOME: /usr/local/cuda
+  TORCH_CUDA_ARCH_LIST: 7.5
+channels:
+  - pytorch
+  - nvidia
+dependencies:
+  # Copied from PyTorch
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.7
+  - pip
+  - pip:
+    # Copied from Diffusers fork
+    - accelerate==0.12.0
+    - transformers
+    - ftfy
+    - bitsandbytes
+    - gradio
+    - natsort
+    - --pre triton
+    - -e git+https://github.com/ShivamShrirao/diffusers.git#egg=diffusers
+    # Ensure you have git clone --recursive'd xformers to /tmp
+    - -r /tmp/xformers/requirements.txt
+    # Needs to be executed somewhere the CUDA_HOME/TORCH_CUDA_ARCH_LIST vars are set, annoyingly
+    # - -e /tmp/xformers

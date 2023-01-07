@@ -1,0 +1,8 @@
+---
+- name: Install Git
+  package:
+    name: git
+    state: latest
+  become: true
+  tags:
+    - git
