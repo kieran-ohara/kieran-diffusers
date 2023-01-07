@@ -28,10 +28,11 @@
 - name: kieran-diffusers
   ansible.builtin.git:
     repo: https://github.com/kieran-ohara/kieran-diffusers.git
-    dest: "{{ ansible_env.HOME }}/kieran-diffusers"
+    dest: "/home/{{ username }}/kieran-diffusers"
+  become: true
+  become_user: "{{ username }}"
   tags:
     - user
-
 
 - name: Ensure wheel group exists
   ansible.builtin.group:
