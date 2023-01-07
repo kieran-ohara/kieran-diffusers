@@ -100,7 +100,7 @@ variable "gcp_instance_image" {
 }
 variable "gcp_machine_type" {
   type    = string
-  default = "n1-standard-1"
+  default = "n1-standard-4"
 }
 variable "gcp_zone" {
   type    = string
