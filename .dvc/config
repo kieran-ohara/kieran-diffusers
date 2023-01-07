@@ -1,4 +1,6 @@
 [core]
-    remote = diffusers
+    remote = diffusershttp
 ['remote "diffusers"']
     url = s3://kieran-diffusers-dvc
+['remote "diffusershttp"']
+    url = https://kieran-diffusers-dvc.s3.amazonaws.com
