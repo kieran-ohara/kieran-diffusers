@@ -1,7 +1,7 @@
 #!/bin/bash
 SRC="${HOME}/src"
 THIS=$(pwd)
-DREAMBOOTH="${SRC}/diffusers/examples/dreambooth"
+DREAMBOOTH="${THIS}/submodules/diffusers/examples/dreambooth"
 
 export MODEL_NAME="CompVis/stable-diffusion-v1-4"
 export INSTANCE_DIR="${THIS}/data/instances/kieran2"
