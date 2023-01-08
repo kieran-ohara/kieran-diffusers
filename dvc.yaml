@@ -1,0 +1,18 @@
+---
+stages:
+  train:
+    cmd: >-
+      train/train.sh
+      ${instance_dir}
+      ${instance_prompt}
+      ${class_prompt}
+      ${class_count}
+      ${learning_rate}
+      ${training_steps}
+    params:
+      - instance_dir
+      - instance_prompt
+      - class_prompt
+      - class_count
+      - learning_rate
+      - training_steps
