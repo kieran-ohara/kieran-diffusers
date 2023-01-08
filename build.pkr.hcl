@@ -56,10 +56,14 @@ variable "gcp_machine_type" {
   type    = string
   default = "e2-standard-4"
 }
+variable "gcp_build_image" {
+  type    = string
+  default = "rocky-linux-8"
+}
 
 source "googlecompute" "rockylinux8" {
   project_id          = var.gcp_project_id
-  source_image_family = "rocky-linux-8"
+  source_image_family = var.gcp_build_image
   ssh_username        = var.gcp_ssh_username
   zone                = var.gcp_zone
   machine_type        = var.gcp_machine_type
