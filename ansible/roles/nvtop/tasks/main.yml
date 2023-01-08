@@ -38,4 +38,3 @@
   become: true
   tags:
     - nvtop
-    - this
