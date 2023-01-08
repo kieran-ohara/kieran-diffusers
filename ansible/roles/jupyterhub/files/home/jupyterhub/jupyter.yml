@@ -1,0 +1,8 @@
+name: jupyterhub
+channels:
+  - conda-forge
+dependencies:
+  - jupyterhub
+  - jupyterlab
+  - notebook
+  - nb_conda_kernels

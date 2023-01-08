@@ -1,0 +1,15 @@
+[Unit]
+Description=JupyterHub
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+User=jupyterhub
+Group=wheel
+; /bin/sh needed bc SELinux prevents binaries from home directories lol.
+ExecStart=/bin/sh /home/jupyterhub/start-jupyterhub.sh
+WorkingDirectory=/home/jupyterhub
+
+[Install]
+WantedBy=multi-user.target

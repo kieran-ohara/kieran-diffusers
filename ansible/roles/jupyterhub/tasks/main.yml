@@ -1,0 +1,75 @@
+---
+- name: Set vars
+  set_fact:
+    jh_username: jupyterhub
+  tags:
+    - jupyterhub
+    - this
+
+- name: Create user.
+  user:
+    name: "{{ jh_username }}"
+    groups:
+      - wheel
+    home: "/home/{{ jh_username }}"
+    shell: /sbin/nologin
+    password: '*'
+  become: true
+  tags:
+    - jupyterhub
+
+- name: Create User's home directory.
+  file:
+    path: "/home/{{ jh_username }}"
+    state: directory
+    owner: "{{ jh_username }}"
+    group: wheel
+  become: true
+  tags:
+    - jupyterhub
+
+- name : Copy Jupyter Config files
+  copy:
+    src: home/jupyterhub/{{ item.fname }}
+    dest: "/home/{{ jh_username }}/{{ item.fname }}"
+    owner: "{{ jh_username }}"
+    group: wheel
+    mode: "{{ item.mode }}"
+  become: true
+  loop:
+    - { fname: "jupyter.yml", mode: '0644'}
+    - { fname: "jupyterhub_config.py", mode: '0644'}
+    - { fname: "start-jupyterhub.sh", mode: '0755'}
+  tags:
+    - jupyterhub
+    - this
+
+- name: Install Jupyter
+  shell:
+    cmd: |
+      source /opt/conda/etc/profile.d/conda.sh
+      conda env create --file jupyter.yml
+  become: true
+  become_user: "{{ jh_username }}"
+  args:
+    chdir: "/home/{{ jh_username }}"
+  # tags:
+  #   - jupyterhub
+
+- name : Copy Jupyter Service file
+  copy:
+    src: etc/systemd/system/jupyterhub.service
+    dest: /etc/systemd/system/jupyterhub.service
+    mode: 0644
+  become: true
+  tags:
+    - jupyterhub
+    - this
+
+- name: Enable Jupyter service
+  service:
+    name: jupyterhub
+    enabled: yes
+  become: true
+  tags:
+      - jupyterhub

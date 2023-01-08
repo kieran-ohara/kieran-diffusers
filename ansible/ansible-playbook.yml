@@ -4,5 +4,6 @@
     - dvc
     - stable-diffusion
     - nvtop
+    - jupyterhub
   vars:
     username: sd
