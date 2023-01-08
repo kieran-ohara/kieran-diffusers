@@ -1,0 +1,12 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: train/train.sh kieran3 kokieran man 228 1e-06 1520
+    params:
+      params.yaml:
+        class_count: 228
+        class_prompt: man
+        instance_dir: kieran3
+        instance_prompt: kokieran
+        learning_rate: 1e-06
+        training_steps: 1520

@@ -12,7 +12,7 @@ TRAINING_STEPS=$6
 THIS=$(pwd)
 PATH_DREAMBOOTH="${THIS}/submodules/diffusers/examples/dreambooth"
 PATH_INSTANCES="${THIS}/data/instances/${INSTANCES}"
-PATH_CLASS="${THIS}/data/class/${CLASS_PROMPT}/${CLASS_COUNT}"
+PATH_CLASS="${THIS}/data/classes/${CLASS_PROMPT}/${CLASS_COUNT}"
 
 OUTPUT_DIR="${THIS}/model"
 
