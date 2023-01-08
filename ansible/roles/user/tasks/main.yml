@@ -5,6 +5,7 @@
       - tmux
       - pciutils
       - ncdu
+      - htop
     state: latest
   become: true
   tags:
