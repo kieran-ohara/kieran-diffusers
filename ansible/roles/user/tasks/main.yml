@@ -39,7 +39,7 @@
     groups:
       - wheel
     home: "/home/{{ username }}"
-    shell: /bin/sh
+    shell: /bin/bash
     password: '*'
   become: true
   tags:
@@ -71,8 +71,8 @@
     src: home/bashrc
     dest: "/home/{{username}}/.bashrc"
     owner: "{{ username }}"
-    group: wheel
-    mode: 0755
+    group: "{{ username }}"
+    mode: 0644
   become: true
   tags:
     - user
