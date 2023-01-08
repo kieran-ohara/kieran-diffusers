@@ -15,7 +15,6 @@
     state: present
   become: true
   tags:
-  tags:
     - libgit
 
 - name: Get libgit
