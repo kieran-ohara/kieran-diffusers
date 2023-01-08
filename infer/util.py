@@ -8,7 +8,7 @@ import torch
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 PROJECT_ROOT = SCRIPT_DIR+"/.."
-MODEL_DIR = f'{PROJECT_ROOT}/model';
+MODEL_DIR = f'{PROJECT_ROOT}/data/model';
 
 def script_dir():
     return SCRIPT_DIR
@@ -19,7 +19,7 @@ def interpolate_prompt(prompt_template, **kwargs):
 
 def get_pipeline(MODEL_NAME):
 
-    model_id = f'{PROJECT_ROOT}/model/{MODEL_NAME}'
+    model_id = f'{MODEL_DIR}/{MODEL_NAME}'
     pipe = StableDiffusionPipeline.from_pretrained(
         model_id,
         torch_dtype=torch.float16,

@@ -14,7 +14,7 @@ PATH_DREAMBOOTH="${THIS}/submodules/diffusers/examples/dreambooth"
 PATH_INSTANCES="${THIS}/data/instances/${INSTANCES}"
 PATH_CLASS="${THIS}/data/classes/${CLASS_PROMPT}/${CLASS_COUNT}"
 
-OUTPUT_DIR="${THIS}/model"
+OUTPUT_DIR="${THIS}/data/model"
 
 cd "${PATH_DREAMBOOTH}" && accelerate launch train_dreambooth.py \
   --pretrained_model_name_or_path="CompVis/stable-diffusion-v1-4"  \
