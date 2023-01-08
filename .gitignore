@@ -13,4 +13,3 @@ outputs
 scripts/prov-compare.sh
 varfile.json
 mlflow/outputs
-/instances
