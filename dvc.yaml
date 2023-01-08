@@ -1,4 +1,6 @@
 ---
+plots:
+  - data/model/${training_steps}/output/${training_steps}_prompts.png
 stages:
   train:
     cmd: >-
@@ -16,3 +18,10 @@ stages:
       - class_count
       - learning_rate
       - training_steps
+    outs:
+      - data/model/${training_steps}
+  infer:
+    cmd: >-
+      infer/infer.py ${training_steps}
+    outs:
+      - data/model/${training_steps}
