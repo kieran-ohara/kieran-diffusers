@@ -6,6 +6,7 @@
       - pciutils
       - ncdu
       - htop
+      - tree
     state: latest
   become: true
   tags:
