@@ -1,3 +1,4 @@
+#cloud-config
 users:
   - name: sd
     plain_text_passwd: ${sd_user_password}
