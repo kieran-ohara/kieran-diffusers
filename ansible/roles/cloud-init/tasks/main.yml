@@ -1,0 +1,24 @@
+---
+- name: Install cloud-init
+  package:
+    name: cloud-init
+    state: latest
+  become: true
+  tags:
+    - cloud-init
+
+- name : Allow cloud-init on GCE
+  copy:
+    src: etc/cloud/cloud.cfg.d/gce.yml
+    dest: /etc/cloud/cloud.cfg.d/gce.yml
+  become: true
+  tags:
+    - cloud-init
+
+- name: Enable cloud-init
+  service:
+    name: jupyterhub
+    enabled: yes
+  become: true
+  tags:
+      - cloud-init
