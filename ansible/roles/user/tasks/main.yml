@@ -58,15 +58,6 @@
   tags:
     - user
 
-- name: Authorize User.
-  authorized_key:
-    key: "{{ ansible_public_ssh_key }}"
-    user: "{{ username }}"
-  become: true
-  become_user: "{{ username }}"
-  tags:
-    - user
-
 - name: Users Bashrc
   copy:
     src: home/bashrc
