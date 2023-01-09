@@ -94,6 +94,15 @@
   tags:
     - jupyterhub
 
+- name: Good god. Do crazy shit for Jupyterhub PAM.
+  file:
+    path: /etc/passwd
+    group: wheel
+  become: true
+  tags:
+    - jupyterhub
+    - this
+
 - name: Install Jupyter
   shell:
     cmd: |
