@@ -1,5 +1,6 @@
 name: sd
 channels:
+  - anaconda
   - pytorch
   - nvidia
 dependencies:
@@ -22,3 +23,5 @@ dependencies:
     - -r submodules/xformers/requirements.txt
     # Needs to be executed somewhere the CUDA_HOME/TORCH_CUDA_ARCH_LIST vars are set, annoyingly
     # - -e submodules/xformers
+  # Needed for making available in jupyhub.
+  - ipykernel
