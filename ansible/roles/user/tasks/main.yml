@@ -54,6 +54,7 @@
     path: "{{ item }}"
   loop:
     - "/home/{{username}}"
+    - "/home/{{username}}/.config"
   become: true
   tags:
     - user
