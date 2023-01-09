@@ -84,9 +84,13 @@ resource "aws_iam_user" "user" {
   }
 }
 
-resource "aws_iam_user_policy_attachment" "user-key-attach" {
+resource "aws_iam_user_policy_attachment" "user-policy-attach" {
   user       = aws_iam_user.user.name
   policy_arn = aws_iam_policy.user-policy.arn
+}
+
+resource "aws_iam_access_key" "user-key" {
+  user = aws_iam_user.user.name
 }
 
 provider "google" {
