@@ -55,6 +55,7 @@
   loop:
     - "/home/{{username}}"
     - "/home/{{username}}/.config"
+    - "/home/{{username}}/.config/git"
   become: true
   tags:
     - user
