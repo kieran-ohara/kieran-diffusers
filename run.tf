@@ -112,6 +112,9 @@ variable "gcp_zone" {
   default = "us-central1-a"
 }
 
+variable "sd_user_public_key" {}
+variable "sd_user_password" {}
+
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = var.gcp_machine_type
@@ -137,6 +140,18 @@ resource "google_compute_instance" "default" {
     access_config {
       // Ephemeral public IP
     }
+  }
+
+  metadata = {
+    user-data = templatefile(
+      "cloud-config.yml",
+      {
+        "sd_user_public_key" = var.sd_user_public_key
+        "sd_user_password" = var.sd_user_password
+        "aws_access_key_id"  = aws_iam_access_key.user-key.id
+        "aws_secret_access_key" = aws_iam_access_key.user-key.secret
+      }
+    )
   }
 }
 
