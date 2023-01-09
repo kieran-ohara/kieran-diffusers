@@ -6,10 +6,10 @@
 .terraform.lock.hcl
 Session.vim
 __pycache__
+build.auto.pkrvars.hcl
 cdk.out
+mlflow/outputs
 model
 output
 outputs
 scripts/prov-compare.sh
-varfile.json
-mlflow/outputs
