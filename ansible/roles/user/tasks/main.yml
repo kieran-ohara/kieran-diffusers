@@ -41,7 +41,7 @@
       - wheel
     home: "/home/{{ username }}"
     shell: /bin/bash
-    password: '*'
+    password_lock: false
   become: true
   tags:
     - user

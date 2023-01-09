@@ -1,0 +1,13 @@
+[Unit]
+Description=JupyterHub
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+User={{ jh_username }}
+ExecStart=/usr/local/bin/start-jupyterhub
+WorkingDirectory=/home/{{ jh_username }}/.jupyter
+
+[Install]
+WantedBy=multi-user.target

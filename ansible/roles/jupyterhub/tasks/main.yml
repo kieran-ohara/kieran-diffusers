@@ -1,44 +1,96 @@
 ---
 - name: Set vars
   set_fact:
-    jh_username: jupyterhub
+    jh_username: "{{ username }}"
   tags:
     - jupyterhub
 
-- name: Create user.
-  user:
-    name: "{{ jh_username }}"
-    groups:
-      - wheel
-    home: "/home/{{ jh_username }}"
-    shell: /sbin/nologin
-    password: '*'
-  become: true
-  tags:
-    - jupyterhub
+# - name: Create user.
+#   user:
+#     name: "{{ jh_username }}"
+#     groups:
+#       - wheel
+#     home: "/home/{{ jh_username }}"
+#     shell: /sbin/nologin
+#     password: '*'
+#   become: true
+#   tags:
+#     - jupyterhub
 
-- name: Create User's home directory.
+# - name: Create User's home directory.
+#   file:
+#     path: "/home/{{ jh_username }}"
+#     state: directory
+#     owner: "{{ jh_username }}"
+#     group: wheel
+#   become: true
+#   tags:
+#     - jupyterhub
+
+- name: Create Jupyter Directories
   file:
-    path: "/home/{{ jh_username }}"
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
     state: directory
-    owner: "{{ jh_username }}"
-    group: wheel
   become: true
+  loop:
+    -
+      {
+        path: "/home/{{ jh_username }}/.jupyter",
+        owner: "{{ jh_username }}",
+        group: "{{ jh_username }}"
+      }
+    -
+      {
+        path: "/etc/jupyterhub",
+        owner: root,
+        group: root
+      }
   tags:
     - jupyterhub
 
-- name : Copy Jupyter Config files
-  copy:
-    src: home/jupyterhub/{{ item.fname }}
-    dest: "/home/{{ jh_username }}/{{ item.fname }}"
-    owner: "{{ jh_username }}"
-    group: wheel
+- name: Configure Jupyter
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   become: true
   loop:
-    - { fname: "jupyter.yml", mode: '0644'}
-    - { fname: "jupyterhub_config.py", mode: '0644'}
-    - { fname: "start-jupyterhub.sh", mode: '0755'}
+    -
+      {
+        src: jupyter.yml,
+        dest: '/home/{{ jh_username }}/jupyter.yml',
+        owner: "{{ jh_username }}",
+        group: "{{ jh_username }}",
+        mode: 644
+      }
+    -
+      {
+        src: "jupyterhub_config.py",
+        dest: '/etc/jupyterhub/jupyterhub_config.py',
+        owner: root,
+        group: root,
+        mode: 644
+      }
+    -
+      {
+        src: "start-jupyterhub.sh",
+        dest: '/usr/local/bin/start-jupyterhub',
+        owner: root,
+        group: root,
+        mode: 755
+      }
+    -
+      {
+        src: jupyterhub.service,
+        dest: /etc/systemd/system/jupyterhub.service,
+        owner: root,
+        group: root,
+        mode: 644
+      }
   tags:
     - jupyterhub
 
@@ -51,22 +103,13 @@
   become_user: "{{ jh_username }}"
   args:
     chdir: "/home/{{ jh_username }}"
-  # tags:
-  #   - jupyterhub
-
-- name : Copy Jupyter Service file
-  copy:
-    src: etc/systemd/system/jupyterhub.service
-    dest: /etc/systemd/system/jupyterhub.service
-    mode: 0644
-  become: true
   tags:
     - jupyterhub
 
 - name: Enable Jupyter service
   service:
     name: jupyterhub
-    enabled: yes
+    enabled: true
   become: true
   tags:
-      - jupyterhub
+    - jupyterhub
