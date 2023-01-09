@@ -2,6 +2,7 @@
 users:
   - name: sd
     plain_text_passwd: ${sd_user_password}
+    lock_passwd: false
     ssh_authorized_keys:
     - ${sd_user_public_key}
 
