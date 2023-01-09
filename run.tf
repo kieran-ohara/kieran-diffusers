@@ -107,6 +107,10 @@ variable "gcp_machine_type" {
   type    = string
   default = "n1-standard-4"
 }
+variable "gcp_gpu_count" {
+  type = number
+  default = 0
+}
 variable "gcp_zone" {
   type    = string
   default = "us-central1-a"
@@ -129,7 +133,7 @@ resource "google_compute_instance" "default" {
 
   guest_accelerator {
     type  = "nvidia-tesla-t4"
-    count = 1
+    count = var.gcp_gpu_count
   }
   scheduling {
     on_host_maintenance = "TERMINATE"
