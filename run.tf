@@ -94,7 +94,7 @@ provider "google" {
 }
 
 variable "gcp_project_id" {}
-variable "gcp_instance_image" {
+variable "gcp_image" {
   type    = string
   default = "rocky-linux-8"
 }
@@ -114,7 +114,7 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-      image = var.gcp_instance_image
+      image = var.gcp_image
       size = 48
     }
   }

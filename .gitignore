@@ -12,4 +12,5 @@ mlflow/outputs
 model
 output
 outputs
+run.auto.tfvars
 scripts/prov-compare.sh
