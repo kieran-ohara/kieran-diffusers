@@ -4,5 +4,6 @@ channels:
 dependencies:
   - jupyterhub
   - jupyterlab
+  - jupyterlab-git
   - nb_conda_kernels
   - notebook
