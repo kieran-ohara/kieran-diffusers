@@ -1,12 +1,26 @@
 schema: '2.0'
 stages:
   train:
-    cmd: train/train.sh kieran3 kokieran man 228 1e-06 1520
+    cmd: train/train.sh kieran4 kokieran man 228 1e-06 10
     params:
       params.yaml:
         class_count: 228
         class_prompt: man
-        instance_dir: kieran3
+        instance_dir: kieran4
         instance_prompt: kokieran
         learning_rate: 1e-06
-        training_steps: 1520
+        training_steps: 10
+    outs:
+    - path: data/model/10
+      md5: c7d0126071576d9f26124425cea0a16e.dir
+      size: 4266985405
+      nfiles: 13
+  infer:
+    cmd: 'infer/infer.py 10 #    outs: #  - data/model/10/args.json'
+  evaluate:
+    cmd: infer/infer.py 10
+    deps:
+    - path: data/model/10
+      md5: bf6ecc76507ee962ce456e724e57a91d.dir
+      size: 4276362916
+      nfiles: 14

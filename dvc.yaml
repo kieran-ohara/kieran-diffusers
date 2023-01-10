@@ -22,6 +22,6 @@ stages:
       - data/model/${training_steps}
   infer:
     cmd: >-
-      infer/infer.py ${training_steps}
-    outs:
+       infer/infer.py ${training_steps}
+    deps:
       - data/model/${training_steps}
