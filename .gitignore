@@ -8,9 +8,8 @@ Session.vim
 __pycache__
 build.auto.pkrvars.hcl
 cdk.out
+data/model
+dvc_plots
 mlflow/outputs
-model
 output
-outputs
 run.auto.tfvars
-scripts/prov-compare.sh

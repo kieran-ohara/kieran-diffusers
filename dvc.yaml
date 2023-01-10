@@ -1,6 +1,4 @@
 ---
-plots:
-  - data/model/${training_steps}/output/${training_steps}_prompts.png
 stages:
   train:
     cmd: >-
@@ -25,3 +23,5 @@ stages:
        infer/infer.py ${training_steps}
     deps:
       - data/model/${training_steps}
+    plots:
+      - output

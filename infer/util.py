@@ -39,7 +39,7 @@ def image_grid(imgs, rows, cols):
     return grid
 
 def output_path(MODEL_NAME):
-    output_path = f'{MODEL_DIR}/{MODEL_NAME}/output'
+    output_path = f'{PROJECT_ROOT}/output'
     isExist = os.path.exists(output_path)
     if not isExist:
         os.makedirs(output_path)
