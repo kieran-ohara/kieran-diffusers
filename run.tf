@@ -140,6 +140,8 @@ resource "google_compute_instance" "default" {
     on_host_maintenance = "TERMINATE"
   }
 
+  allow_stopping_for_update = true
+
   network_interface {
     network = "default"
     access_config {
