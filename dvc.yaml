@@ -2,26 +2,41 @@
 stages:
   train:
     cmd: >-
-      train/train.sh
-      ${instance_dir}
-      ${instance_prompt}
-      ${class_prompt}
-      ${class_count}
-      ${learning_rate}
-      ${training_steps}
+      accelerate launch submodules/diffusers/examples/dreambooth/train_dreambooth.py 
+      --pretrained_model_name_or_path="${pretrained_model}"
+      --class_data_dir="${class.dir}"
+      --class_prompt="${class.prompt}" 
+      --num_class_images="${class.count}" 
+      --instance_data_dir="${instance.dir}"
+      --instance_prompt="${instance.prompt}" 
+      --output_dir=src/train/model 
+      --with_prior_preservation 
+      --prior_loss_weight=1.0 
+      --resolution=512 
+      --train_batch_size=1 
+      --gradient_accumulation_steps=1 
+      --learning_rate="${learning_rate}" 
+      --lr_scheduler="constant" 
+      --lr_warmup_steps=0 
+      --max_train_steps="${training_steps}" 
+      --gradient_checkpointing 
+      --mixed_precision=fp16 
+      --use_8bit_adam
     params:
-      - instance_dir
-      - instance_prompt
-      - class_prompt
-      - class_count
+      - pretrained_model
+      - class.dir
+      - class.prompt
+      - class.count
+      - instance.dir
+      - instance.prompt
       - learning_rate
       - training_steps
     outs:
-      - data/model/${training_steps}
+      - src/train/model/${training_steps}
   infer:
     cmd: >-
        infer/infer.py ${training_steps}
     deps:
-      - data/model/${training_steps}
+      - src/train/model/${training_steps}
     plots:
-      - output
+      - src/infer/output

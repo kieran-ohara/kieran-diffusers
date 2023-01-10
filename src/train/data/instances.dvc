@@ -1,0 +1,5 @@
+outs:
+- md5: 99fe9d00bb12a4f2e86a7e04faa865fb.dir
+  size: 4480830
+  nfiles: 115
+  path: instances

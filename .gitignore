@@ -13,3 +13,4 @@ dvc_plots
 mlflow/outputs
 output
 run.auto.tfvars
+src/train/model
