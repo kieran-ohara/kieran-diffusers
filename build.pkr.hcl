@@ -29,6 +29,7 @@ variable "gcp_build_image" {
 source "googlecompute" "rockylinux8" {
   project_id          = var.gcp_project_id
   source_image_family = var.gcp_build_image
+  image_name = "kieran-diffusers-{{timestamp}}"
   ssh_username        = var.gcp_ssh_username
   zone                = var.gcp_zone
   machine_type        = var.gcp_machine_type
