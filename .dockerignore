@@ -1,9 +1,0 @@
-.git
-.husky
-cdk.json
-cdk.out
-docs
-infer
-lib
-node_modules
-train
