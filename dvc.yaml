@@ -37,9 +37,8 @@ stages:
     cmd: |
        src/infer/infer.py ${training_steps}
        src/infer/infer.py ${training_steps} -p prompts2
-       src/infer/infer.py ${training_steps} -p prompts3
-       src/infer/infer.py ${training_steps} -p prompts4
-       src/infer/infer.py ${training_steps} -p prompts5
+       src/infer/infer.py ${training_steps} -p tough-ones
+       src/infer/infer.py ${training_steps} -p tough-ones2
     deps:
       - src/train/model/${training_steps}
     plots:
