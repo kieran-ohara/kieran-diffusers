@@ -40,12 +40,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('model')
     parser.add_argument('-p', '--prompts', default="prompts")
+    parser.add_argument('-i', '--instance', default="kokieran man")
     args = parser.parse_args()
 
     pipe = get_pipeline(args.model)
 
     with open(f'{SCRIPT_DIR}/prompts/{args.prompts}.txt') as file:
-        prompts = [interpolate_prompt(line, instance='kokieran man') for line in file]
+        prompts = [interpolate_prompt(line, instance=args.instance) for line in file]
         num_images_per_prompt = 5
 
         generator = torch.Generator("cuda").manual_seed(1024)
