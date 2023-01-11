@@ -2,37 +2,39 @@ schema: '2.0'
 stages:
   train:
     cmd: accelerate launch submodules/diffusers/examples/dreambooth/train_dreambooth.py  --pretrained_model_name_or_path="CompVis/stable-diffusion-v1-4"
-      --class_data_dir="src/train/data/classes/man/4400" --class_prompt="man"  --num_class_images="4400"  --instance_data_dir="src/train/data/instances/kieran3and4"
-      --instance_prompt="kokieran"  --output_dir=src/train/model  --with_prior_preservation  --prior_loss_weight=1.0  --resolution=512  --train_batch_size=1  --gradient_accumulation_steps=1  --learning_rate="1e-06"  --lr_scheduler="constant"  --lr_warmup_steps=0  --max_train_steps="5520"  --gradient_checkpointing  --mixed_precision=fp16  --use_8bit_adam
+      --class_data_dir="src/train/data/classes/cat/800" --class_prompt="cat"  --num_class_images="800"  --instance_data_dir="src/train/data/instances/joyce"
+      --instance_prompt="kostancat"  --output_dir=src/train/model  --with_prior_preservation  --prior_loss_weight=1.0  --resolution=512  --train_batch_size=1  --gradient_accumulation_steps=1  --learning_rate="3e-06"  --lr_scheduler="constant"  --lr_warmup_steps=0  --max_train_steps="800"  --gradient_checkpointing  --mixed_precision=fp16  --use_8bit_adam
     params:
       params.yaml:
-        class.count: 4400
-        class.dir: src/train/data/classes/man/4400
-        class.prompt: man
-        instance.dir: src/train/data/instances/kieran3and4
-        instance.prompt: kokieran
-        learning_rate: 1e-06
+        class.count: 800
+        class.dir: src/train/data/classes/cat/800
+        class.prompt: cat
+        instance.dir: src/train/data/instances/joyce
+        instance.prompt: kostancat
+        learning_rate: 3e-06
         pretrained_model: CompVis/stable-diffusion-v1-4
-        training_steps: 5520
+        training_steps: 800
     outs:
-    - path: src/train/model/5520
-      md5: 6a862445012008d07f5799815aaf27e3.dir
-      size: 4266985332
+    - path: src/train/model/800
+      md5: 14f159cb3718a8a9d124ae1f32f071ad.dir
+      size: 4266985318
       nfiles: 13
   infer:
-    cmd: "src/infer/infer.py 5520\nsrc/infer/infer.py 5520 -p prompts2\nsrc/infer/infer.py\
-      \ 5520 -p prompts3\nsrc/infer/infer.py 5520 -p prompts4\nsrc/infer/infer.py\
-      \ 5520 -p prompts5\n"
+    cmd: "src/infer/infer.py 800 -p jprompt -i kostancat -c cat\n"
     deps:
-    - path: src/train/model/5520
-      md5: 6a862445012008d07f5799815aaf27e3.dir
-      size: 4266985332
+    - path: src/train/model/800
+      md5: 14f159cb3718a8a9d124ae1f32f071ad.dir
+      size: 4266985318
       nfiles: 13
+    params:
+      params.yaml:
+        class.prompt: cat
+        instance.prompt: kostancat
     outs:
     - path: src/infer/output
-      md5: c3caa75e59bc8ae89c9460fadcfc13fb.dir
-      size: 50891914
-      nfiles: 5
+      md5: 8277874f32473c23d7583f86c44e8d12.dir
+      size: 9018153
+      nfiles: 1
   evaluate:
     cmd: infer/infer.py 10
     deps:

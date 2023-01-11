@@ -35,11 +35,11 @@ stages:
       - src/train/model/${training_steps}
   infer:
     cmd: |
-       src/infer/infer.py ${training_steps}
-       src/infer/infer.py ${training_steps} -p prompts2
-       src/infer/infer.py ${training_steps} -p tough-ones
-       src/infer/infer.py ${training_steps} -p tough-ones2
+       src/infer/infer.py ${training_steps} -p jprompt -i ${instance.prompt} -c ${class.prompt}
     deps:
       - src/train/model/${training_steps}
+    params:
+      - instance.prompt
+      - class.prompt
     plots:
       - src/infer/output

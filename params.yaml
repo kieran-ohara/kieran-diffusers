@@ -1,11 +1,11 @@
 ---
 pretrained_model: CompVis/stable-diffusion-v1-4
 class:
-  dir: src/train/data/classes/man/4400
-  prompt: man
-  count: 4400
+  dir: src/train/data/classes/cat/800
+  prompt: cat
+  count: 800
 instance:
-  dir: src/train/data/instances/kieran3and4
-  prompt: kokieran
-learning_rate: 1e-6
-training_steps: 5520
+  dir: src/train/data/instances/joyce
+  prompt: kostancat
+learning_rate: 3e-06
+training_steps: 800
