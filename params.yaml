@@ -8,4 +8,4 @@ instance:
   dir: src/train/data/instances/kieran3and4
   prompt: kokieran
 learning_rate: 1e-6
-training_steps: 4600
+training_steps: 5520

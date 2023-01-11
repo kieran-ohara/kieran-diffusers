@@ -3,7 +3,7 @@ stages:
   train:
     cmd: accelerate launch submodules/diffusers/examples/dreambooth/train_dreambooth.py  --pretrained_model_name_or_path="CompVis/stable-diffusion-v1-4"
       --class_data_dir="src/train/data/classes/man/4400" --class_prompt="man"  --num_class_images="4400"  --instance_data_dir="src/train/data/instances/kieran3and4"
-      --instance_prompt="kokieran"  --output_dir=src/train/model  --with_prior_preservation  --prior_loss_weight=1.0  --resolution=512  --train_batch_size=1  --gradient_accumulation_steps=1  --learning_rate="1e-06"  --lr_scheduler="constant"  --lr_warmup_steps=0  --max_train_steps="4600"  --gradient_checkpointing  --mixed_precision=fp16  --use_8bit_adam
+      --instance_prompt="kokieran"  --output_dir=src/train/model  --with_prior_preservation  --prior_loss_weight=1.0  --resolution=512  --train_batch_size=1  --gradient_accumulation_steps=1  --learning_rate="1e-06"  --lr_scheduler="constant"  --lr_warmup_steps=0  --max_train_steps="5520"  --gradient_checkpointing  --mixed_precision=fp16  --use_8bit_adam
     params:
       params.yaml:
         class.count: 4400
@@ -13,25 +13,25 @@ stages:
         instance.prompt: kokieran
         learning_rate: 1e-06
         pretrained_model: CompVis/stable-diffusion-v1-4
-        training_steps: 4600
+        training_steps: 5520
     outs:
-    - path: src/train/model/4600
-      md5: 711a4efcec128d1adcde49ae678c19fe.dir
+    - path: src/train/model/5520
+      md5: 6a862445012008d07f5799815aaf27e3.dir
       size: 4266985332
       nfiles: 13
   infer:
-    cmd: "src/infer/infer.py 4600\nsrc/infer/infer.py 4600 -p prompts2\nsrc/infer/infer.py\
-      \ 4600 -p prompts3\nsrc/infer/infer.py 4600 -p prompts4\nsrc/infer/infer.py\
-      \ 4600 -p prompts5\n"
+    cmd: "src/infer/infer.py 5520\nsrc/infer/infer.py 5520 -p prompts2\nsrc/infer/infer.py\
+      \ 5520 -p prompts3\nsrc/infer/infer.py 5520 -p prompts4\nsrc/infer/infer.py\
+      \ 5520 -p prompts5\n"
     deps:
-    - path: src/train/model/4600
-      md5: 711a4efcec128d1adcde49ae678c19fe.dir
+    - path: src/train/model/5520
+      md5: 6a862445012008d07f5799815aaf27e3.dir
       size: 4266985332
       nfiles: 13
     outs:
     - path: src/infer/output
-      md5: 1b6511734f34821ca798b4aa5327610c.dir
-      size: 50603528
+      md5: c3caa75e59bc8ae89c9460fadcfc13fb.dir
+      size: 50891914
       nfiles: 5
   evaluate:
     cmd: infer/infer.py 10
