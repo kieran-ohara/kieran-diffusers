@@ -20,7 +20,9 @@ stages:
       size: 4266985323
       nfiles: 13
   infer:
-    cmd: src/infer/infer.py 2160
+    cmd: "src/infer/infer.py 2160\nsrc/infer/infer.py 2160 -p prompts2\nsrc/infer/infer.py\
+      \ 2160 -p prompts3\nsrc/infer/infer.py 2160 -p prompts4\nsrc/infer/infer.py\
+      \ 2160 -p prompts5\n"
     deps:
     - path: src/train/model/2160
       md5: b26003b38934547cff6f82816572b779.dir
@@ -28,9 +30,9 @@ stages:
       nfiles: 13
     outs:
     - path: src/infer/output
-      md5: c3afdda363f45c9cbc1e6836036f085a.dir
-      size: 9017691
-      nfiles: 1
+      md5: 6637ca40f8521f451b1b4fc4c0f22b1b.dir
+      size: 51174800
+      nfiles: 5
   evaluate:
     cmd: infer/infer.py 10
     deps:
