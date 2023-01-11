@@ -26,3 +26,4 @@ Comparing the different cloud providers re. cost.
 | n1-standard-4 | asia-east1   | 0.41         | Nvidia Tensor T4 | 16              | 15          |
 | n1-standard-4 | us-central1  | 0.38         | Nvidia Tensor T4 | 16              | 15          |
 | n1-standard-4 | us-central1  | 0.63         | Nvidia Tensor T4 | 2x16            | 15          |
+| n1-standard-4 | us-central1  | 1.11         | Nvidia Tensor T4 | 4x16            | 15          |
