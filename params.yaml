@@ -1,11 +1,11 @@
 ---
 pretrained_model: CompVis/stable-diffusion-v1-4
 class:
-  dir: src/train/data/classes/man/228
+  dir: src/train/data/classes/man/4400
   prompt: man
-  count: 228
+  count: 4400
 instance:
-  dir: src/train/data/instances/kieran4
+  dir: src/train/data/instances/kieran3and4
   prompt: kokieran
 learning_rate: 1e-6
-training_steps: 2160
+training_steps: 4600
