@@ -35,7 +35,7 @@ stages:
       - src/train/model/${training_steps}
   infer:
     cmd: >-
-       infer/infer.py ${training_steps}
+       src/infer/infer.py ${training_steps}
     deps:
       - src/train/model/${training_steps}
     plots:

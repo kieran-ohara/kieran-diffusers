@@ -1,31 +1,35 @@
 schema: '2.0'
 stages:
   train:
-    cmd: train/train.sh kieran4 kokieran man 228 1e-06 2160
+    cmd: accelerate launch submodules/diffusers/examples/dreambooth/train_dreambooth.py  --pretrained_model_name_or_path="CompVis/stable-diffusion-v1-4"
+      --class_data_dir="src/train/data/classes/man/228" --class_prompt="man"  --num_class_images="228"  --instance_data_dir="src/train/data/instances/kieran4"
+      --instance_prompt="kokieran"  --output_dir=src/train/model  --with_prior_preservation  --prior_loss_weight=1.0  --resolution=512  --train_batch_size=1  --gradient_accumulation_steps=1  --learning_rate="1e-06"  --lr_scheduler="constant"  --lr_warmup_steps=0  --max_train_steps="2160"  --gradient_checkpointing  --mixed_precision=fp16  --use_8bit_adam
     params:
       params.yaml:
-        class_count: 228
-        class_prompt: man
-        instance_dir: kieran4
-        instance_prompt: kokieran
+        class.count: 228
+        class.dir: src/train/data/classes/man/228
+        class.prompt: man
+        instance.dir: src/train/data/instances/kieran4
+        instance.prompt: kokieran
         learning_rate: 1e-06
+        pretrained_model: CompVis/stable-diffusion-v1-4
         training_steps: 2160
     outs:
-    - path: data/model/2160
-      md5: bdf113dbfbce618a495c7736f4fb85f6.dir
-      size: 4266985408
+    - path: src/train/model/2160
+      md5: b26003b38934547cff6f82816572b779.dir
+      size: 4266985323
       nfiles: 13
   infer:
-    cmd: infer/infer.py 2160
+    cmd: src/infer/infer.py 2160
     deps:
-    - path: data/model/2160
-      md5: bdf113dbfbce618a495c7736f4fb85f6.dir
-      size: 4266985408
+    - path: src/train/model/2160
+      md5: b26003b38934547cff6f82816572b779.dir
+      size: 4266985323
       nfiles: 13
     outs:
-    - path: output
-      md5: 86f5434cad32a92704c065092a59db57.dir
-      size: 9038753
+    - path: src/infer/output
+      md5: c3afdda363f45c9cbc1e6836036f085a.dir
+      size: 9017691
       nfiles: 1
   evaluate:
     cmd: infer/infer.py 10
