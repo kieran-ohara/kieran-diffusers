@@ -7,16 +7,16 @@ users:
     - ${sd_user_public_key}
 
 write_files:
-- path: /home/sd/.aws/config
-  permissions: 0644
-  owner: sd
-  content: |
-    [default]
-    region=eu-west-2
-- path: /home/sd/.aws/credentials
-  permissions: 0644
-  owner: sd
-  content: |
-    [default]
-    aws_access_key_id=${aws_access_key_id}
-    aws_secret_access_key=${aws_secret_access_key}
+  - path: /home/sd/.aws/config
+    permissions: 0644
+    owner: sd
+    content: |
+      [default]
+      region=eu-west-2
+  - path: /home/sd/.aws/credentials
+    permissions: 0644
+    owner: sd
+    content: |
+      [default]
+      aws_access_key_id=${aws_access_key_id}
+      aws_secret_access_key=${aws_secret_access_key}
