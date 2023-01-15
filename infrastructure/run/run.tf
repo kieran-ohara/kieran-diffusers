@@ -5,7 +5,7 @@ terraform {
       version = "~> 3.0"
     }
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
       version = "4.47.0"
     }
   }
@@ -108,7 +108,7 @@ variable "gcp_machine_type" {
   default = "n1-standard-4"
 }
 variable "gcp_gpu_count" {
-  type = number
+  type    = number
   default = 0
 }
 variable "gcp_zone" {
@@ -153,9 +153,9 @@ resource "google_compute_instance" "default" {
     user-data = templatefile(
       "cloud-config.yml",
       {
-        "sd_user_public_key" = var.sd_user_public_key
-        "sd_user_password" = var.sd_user_password
-        "aws_access_key_id"  = aws_iam_access_key.user-key.id
+        "sd_user_public_key"    = var.sd_user_public_key
+        "sd_user_password"      = var.sd_user_password
+        "aws_access_key_id"     = aws_iam_access_key.user-key.id
         "aws_secret_access_key" = aws_iam_access_key.user-key.secret
       }
     )
