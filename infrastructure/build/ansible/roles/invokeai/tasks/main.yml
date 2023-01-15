@@ -1,0 +1,24 @@
+---
+- name: kieran-diffusers
+  git:
+    repo: https://github.com/invoke-ai/InvokeAI
+    dest: "/home/{{ username }}/invokeai"
+    recursive: yes
+  become: true
+  become_user: "{{ username }}"
+  tags:
+    - invokeai
+
+- name: Symlink for easy access
+  file:
+    src: "/home/{{ username }}/invokeai/environments-and-requirements/requirements-lin-cuda.txt"
+    dest: "/home/{{ username }}/invokeai/requirements.txt"
+    owner: "{{ username }}"
+    group: wheel
+    mode: 0644
+    state: link
+  become: true
+  become_user: "{{ username }}"
+  tags:
+    - invokeai
+    - this
