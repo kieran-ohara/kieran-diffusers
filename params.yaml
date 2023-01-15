@@ -9,3 +9,5 @@ instance:
   prompt: kokieran
 learning_rate: 1e-06
 training_steps: 8280
+infer:
+  instance: kokieran man
