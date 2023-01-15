@@ -20,10 +20,10 @@ stages:
       size: 4266985332
       nfiles: 13
   infer:
-    cmd: "src/infer/infer.py 8280 -p prompts -i kokieran -c man\nsrc/infer/infer.py\
-      \ 8280 -p prompts2 -i kokieran -c man\nsrc/infer/infer.py 8280 -p tough-ones\
-      \ -i kokieran -c man\nsrc/infer/infer.py 8280 -p tough-ones2 -i kokieran -c\
-      \ man\n"
+    cmd: "src/infer/infer.py 8280 -p prompts -i \"kokieran man\"\nsrc/infer/infer.py\
+      \ 8280 -p prompts2 -i \"kokieran man\"\nsrc/infer/infer.py 8280 -p tough-ones\
+      \ -i \"kokieran man\"\nsrc/infer/infer.py 8280 -p tough-ones2 -i \"kokieran\
+      \ man\"\n"
     deps:
     - path: src/train/model/8280
       md5: c38fbf74016a43bb54b9f8da76aaff39.dir
@@ -31,12 +31,11 @@ stages:
       nfiles: 13
     params:
       params.yaml:
-        class.prompt: man
-        instance.prompt: kokieran
+        infer.instance: kokieran man
     outs:
     - path: src/infer/output
-      md5: 5a753c2fe3f73d5f9a53195752e97ded.dir
-      size: 43831432
+      md5: 8cc2835ffdca81ba080e4429964e7f72.dir
+      size: 45730610
       nfiles: 4
   evaluate:
     cmd: infer/infer.py 10
