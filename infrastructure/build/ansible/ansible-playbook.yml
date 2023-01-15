@@ -3,7 +3,6 @@
   roles:
     - dvc
     - stable-diffusion
-    - nvtop
     - jupyterhub
     - cloud-init
   vars:
