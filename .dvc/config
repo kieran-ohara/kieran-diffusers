@@ -1,5 +1,6 @@
 [core]
     remote = diffusershttp
+    autostage = true
 ['remote "diffusers"']
     url = s3://kieran-diffusers-dvc
 ['remote "diffusershttp"']
