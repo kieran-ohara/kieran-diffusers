@@ -2,22 +2,23 @@ schema: '2.0'
 stages:
   train:
     cmd: accelerate launch submodules/diffusers/examples/dreambooth/train_dreambooth.py  --pretrained_model_name_or_path="CompVis/stable-diffusion-v1-4"
-      --class_data_dir="src/train/data/classes/man/4400" --class_prompt="man"  --num_class_images="4400"  --instance_data_dir="src/train/data/instances/kieran3and4"
-      --instance_prompt="kokieran"  --output_dir=src/train/model  --with_prior_preservation  --prior_loss_weight=1.0  --resolution=512  --train_batch_size=1  --gradient_accumulation_steps=1  --learning_rate="1e-06"  --lr_scheduler="constant"  --lr_warmup_steps=0  --max_train_steps="8280"  --gradient_checkpointing  --mixed_precision=fp16  --use_8bit_adam
+      --class_data_dir="src/train/data/classes/man/228" --class_prompt="man"  --num_class_images="228"  --instance_data_dir="src/train/data/instances/kieran3and4"
+      --instance_prompt="kokieran"  --output_dir=src/train/model  --with_prior_preservation  --prior_loss_weight=1.0  --resolution=512  --train_batch_size=1  --gradient_accumulation_steps=1  --learning_rate="5e-06"  --lr_scheduler="constant"  --lr_warmup_steps=0  --max_train_steps="100"  --gradient_checkpointing  --mixed_precision=fp16  --use_8bit_adam
+      && mv src/train/model/100 src/train/output
     params:
       params.yaml:
-        class.count: 4400
-        class.dir: src/train/data/classes/man/4400
+        class.count: 228
+        class.dir: src/train/data/classes/man/228
         class.prompt: man
         instance.dir: src/train/data/instances/kieran3and4
         instance.prompt: kokieran
-        learning_rate: 1e-06
+        learning_rate: 5e-06
         pretrained_model: CompVis/stable-diffusion-v1-4
-        training_steps: 8280
+        training_steps: 100
     outs:
-    - path: src/train/model/8280
-      md5: c38fbf74016a43bb54b9f8da76aaff39.dir
-      size: 4266985332
+    - path: src/train/output
+      md5: 2ce48574aaa9b25631efcceb21980f86.dir
+      size: 4266985329
       nfiles: 13
   infer:
     cmd: "src/infer/infer.py 8280 -p prompts -i \"kokieran man\"\nsrc/infer/infer.py\
@@ -44,3 +45,47 @@ stages:
       md5: bf6ecc76507ee962ce456e724e57a91d.dir
       size: 4276362916
       nfiles: 14
+  infer@prompts:
+    cmd: src/infer/infer.py 100 -p "prompts" -i "kokieran man"
+    deps:
+    - path: src/train/output
+      md5: 2ce48574aaa9b25631efcceb21980f86.dir
+      size: 4266985329
+      nfiles: 13
+    outs:
+    - path: src/infer/output/prompts.png
+      md5: cc5fb73e29e6f2b810761f12df680387
+      size: 11030897
+  infer@prompts2:
+    cmd: src/infer/infer.py 100 -p "prompts2" -i "kokieran man"
+    deps:
+    - path: src/train/output
+      md5: 2ce48574aaa9b25631efcceb21980f86.dir
+      size: 4266985329
+      nfiles: 13
+    outs:
+    - path: src/infer/output/prompts2.png
+      md5: ce2d6c8165f9cc6bb1661fc7106e3664
+      size: 11173551
+  infer@tough-ones:
+    cmd: src/infer/infer.py 100 -p "tough-ones" -i "kokieran man"
+    deps:
+    - path: src/train/output
+      md5: 2ce48574aaa9b25631efcceb21980f86.dir
+      size: 4266985329
+      nfiles: 13
+    outs:
+    - path: src/infer/output/tough-ones.png
+      md5: d9b15545bd1d7153d3dc7dfa3e8c4b24
+      size: 13285830
+  infer@tough-ones2:
+    cmd: src/infer/infer.py 100 -p "tough-ones2" -i "kokieran man"
+    deps:
+    - path: src/train/output
+      md5: 2ce48574aaa9b25631efcceb21980f86.dir
+      size: 4266985329
+      nfiles: 13
+    outs:
+    - path: src/infer/output/tough-ones2.png
+      md5: e33690aeb9f2bdb976a7d444ec92fa34
+      size: 12830656

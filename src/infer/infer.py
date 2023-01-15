@@ -11,7 +11,7 @@ from image_grid import image_grid
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 PROJECT_ROOT = SCRIPT_DIR+"/../.."
-MODEL_DIR = f'{PROJECT_ROOT}/src/train/model';
+MODEL_DIR = f'{PROJECT_ROOT}/src/train/output';
 
 def script_dir():
     return SCRIPT_DIR
@@ -21,9 +21,8 @@ def interpolate_prompt(prompt_template, **kwargs):
     return  template.substitute(**kwargs)
 
 def get_pipeline(MODEL_NAME):
-    model_id = f'{MODEL_DIR}/{MODEL_NAME}'
     pipe = StableDiffusionPipeline.from_pretrained(
-        model_id,
+        MODEL_DIR,
         torch_dtype=torch.float16,
     )
     cuda_pipe = pipe.to("cuda")
