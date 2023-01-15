@@ -4,7 +4,7 @@
 graph TD;
 
     linux[Linux Kernel v4]
-    
+
 
     subgraph Inference
         model[Pretrained Model]
@@ -39,7 +39,7 @@ graph TD;
         instances --> train
         parameters --> train
     end
-    
+
     subgraph NVIDIA
         gpu[NVIDIA GPU]
         cuda[CUDA]

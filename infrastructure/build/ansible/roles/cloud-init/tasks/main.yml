@@ -7,7 +7,7 @@
   tags:
     - cloud-init
 
-- name : Allow cloud-init on GCE
+- name: Allow cloud-init on GCE
   copy:
     src: etc/cloud/cloud.cfg.d/gce.yml
     dest: /etc/cloud/cloud.cfg.d/gce.yml
@@ -21,4 +21,4 @@
     enabled: yes
   become: true
   tags:
-      - cloud-init
+    - cloud-init

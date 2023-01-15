@@ -11,7 +11,7 @@
 
 - name: Install the 'Development tools' for building
   dnf:
-    name: '@Development tools'
+    name: "@Development tools"
     state: present
   become: true
   tags:

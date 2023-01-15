@@ -35,18 +35,12 @@
     state: directory
   become: true
   loop:
-    -
-      {
+    - {
         path: "/home/{{ jh_username }}/.jupyter",
         owner: "{{ jh_username }}",
-        group: "{{ jh_username }}"
+        group: "{{ jh_username }}",
       }
-    -
-      {
-        path: "/etc/jupyterhub",
-        owner: root,
-        group: root
-      }
+    - { path: "/etc/jupyterhub", owner: root, group: root }
   tags:
     - jupyterhub
 
@@ -59,37 +53,33 @@
     mode: "{{ item.mode }}"
   become: true
   loop:
-    -
-      {
+    - {
         src: jupyter.yml,
-        dest: '/home/{{ jh_username }}/jupyter.yml',
+        dest: "/home/{{ jh_username }}/jupyter.yml",
         owner: "{{ jh_username }}",
         group: "{{ jh_username }}",
-        mode: 644
+        mode: 644,
       }
-    -
-      {
+    - {
         src: "jupyterhub_config.py",
-        dest: '/etc/jupyterhub/jupyterhub_config.py',
+        dest: "/etc/jupyterhub/jupyterhub_config.py",
         owner: root,
         group: root,
-        mode: 644
+        mode: 644,
       }
-    -
-      {
+    - {
         src: "start-jupyterhub.sh",
-        dest: '/usr/local/bin/start-jupyterhub',
+        dest: "/usr/local/bin/start-jupyterhub",
         owner: root,
         group: root,
-        mode: 755
+        mode: 755,
       }
-    -
-      {
+    - {
         src: jupyterhub.service,
         dest: /etc/systemd/system/jupyterhub.service,
         owner: root,
         group: root,
-        mode: 644
+        mode: 644,
       }
   tags:
     - jupyterhub
