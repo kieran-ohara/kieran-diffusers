@@ -1,16 +1,15 @@
 ---
 pretrained_model: CompVis/stable-diffusion-v1-4
 class:
-  prompt: man
-  count: 228
+  prompt: cat
+  count: 200
 instance:
-  prompt: kokieran
-learning_rate: 5e-06
-training_steps: 100
+  prompt: kowilfred
+learning_rate: 3e-06
+training_steps: 2800
 infer:
-  instance: kokieran man
+  instance: kowilfred
   prompts:
-    - prompts
-    - prompts2
-    - tough-ones
-    - tough-ones2
+    - cat-prompts
+    - cat-prompts2
+    - cat-prompts3
