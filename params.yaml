@@ -13,6 +13,6 @@ infer:
   instance: kokieran man
   prompts:
     - prompts
-    - prompts2 
+    - prompts2
     - tough-ones
     - tough-ones2
