@@ -16,11 +16,11 @@
 
 - name: Configure VSCode
   template:
-      src: vscode.service
-      dest: /etc/systemd/system/vscode.service
-      owner: root
-      group: root
-      mode: 644
+    src: vscode.service
+    dest: /etc/systemd/system/vscode.service
+    owner: root
+    group: root
+    mode: 644
   become: true
   tags:
     - vscode
