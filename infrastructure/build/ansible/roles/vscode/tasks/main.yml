@@ -1,0 +1,34 @@
+---
+- name: Set vars
+  set_fact:
+    vscode_username: "{{ username }}"
+  tags:
+    - vscode
+
+- name: Download VSCode CLI
+  unarchive:
+    src: https://az764295.vo.msecnd.net/stable/97dec172d3256f8ca4bfb2143f3f76b503ca0534/vscode_cli_alpine_x64_cli.tar.gz
+    dest: /usr/local/bin
+    remote_src: true
+  become: true
+  tags:
+    - vscode
+
+- name: Configure VSCode
+  template:
+      src: vscode.service
+      dest: /etc/systemd/system/vscode.service
+      owner: root
+      group: root
+      mode: 644
+  become: true
+  tags:
+    - vscode
+
+- name: Enable VSCode Service
+  service:
+    name: vscode
+    enabled: true
+  become: true
+  tags:
+    - vscode

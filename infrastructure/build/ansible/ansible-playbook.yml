@@ -1,9 +1,10 @@
 ---
 - hosts: rockylinux8
   roles:
+    - cloud-init
     - dvc
     - stable-diffusion
-    - jupyterhub
-    - cloud-init
+    - vscode
   vars:
     username: sd
+    vscode_servername: kieran-diffusers

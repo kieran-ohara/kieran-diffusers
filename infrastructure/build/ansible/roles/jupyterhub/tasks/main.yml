@@ -107,7 +107,7 @@
 - name: Enable Jupyter service
   service:
     name: jupyterhub
-    enabled: true
+    enabled: false
   become: true
   tags:
     - jupyterhub

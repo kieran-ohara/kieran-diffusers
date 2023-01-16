@@ -1,0 +1,14 @@
+[Unit]
+Description=vscode
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+User={{ vscode_username }}
+ExecStart=/usr/local/bin/code tunnel --accept-server-license-terms --name {{ vscode_servername }}
+
+WorkingDirectory=/home/{{ vscode_username }}
+
+[Install]
+WantedBy=multi-user.target
