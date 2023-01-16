@@ -17,7 +17,7 @@
 
 - name: Enable cloud-init
   service:
-    name: jupyterhub
+    name: cloud-init
     enabled: yes
   become: true
   tags:
