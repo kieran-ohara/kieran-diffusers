@@ -15,10 +15,10 @@ Comparing the different cloud providers re. cost.
 
 ## GCP
 
-| Class          | region       | Price ($ ph) | GPU              | GPU Memory (Gb) | Memory (Gb) |
-| -------------- | ------------ | ------------ | ---------------- | --------------- | ----------- |
-| n1-standard-4  | us-central1  | 0.38         | Nvidia Tensor T4 | 16              | 15          |
-| n1-standard-4  | us-central1  | 0.63         | Nvidia Tensor T4 | 2x16            | 15          |
-| n1-standard-8  | us-central1  | 0.76         | Nvidia Tensor T4 | 2x16            | 30          |
-| n1-standard-8  | us-central1  | 1.25         | Nvidia Tensor T4 | 4x16            | 30          |
-| n1-standard-16 | us-central1  | 1.51         | Nvidia Tensor T4 | 4x16            | 60          |
+| Class          | region      | Price ($ ph) | GPU              | GPU Memory (Gb) | Memory (Gb) | Recommended |
+| -------------- | ----------- | ------------ | ---------------- | --------------- | ----------- | ----------- |
+| n1-standard-4  | us-central1 | 0.38         | Nvidia Tensor T4 | 16              | 15          | x           |
+| n1-standard-4  | us-central1 | 0.63         | Nvidia Tensor T4 | 2x16            | 15          |             |
+| n1-standard-8  | us-central1 | 0.76         | Nvidia Tensor T4 | 2x16            | 30          | x           |
+| n1-standard-8  | us-central1 | 1.25         | Nvidia Tensor T4 | 4x16            | 30          | x           |
+| n1-standard-16 | us-central1 | 1.51         | Nvidia Tensor T4 | 4x16            | 60          |             |
