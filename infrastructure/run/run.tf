@@ -124,6 +124,12 @@ variable "gcp_zone" {
   type    = string
   default = "europe-west4-a"
 }
+/* variable "machine_configs" { */
+/*   type = map */
+/*   default = { */
+/*     "small" = */
+/*   } */
+/* } */
 
 variable "sd_user_public_key" {}
 variable "sd_user_password" {}
