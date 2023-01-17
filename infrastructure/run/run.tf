@@ -95,6 +95,7 @@ resource "aws_iam_access_key" "user-key" {
 
 provider "google" {
   project = var.gcp_project_id
+  zone = var.gcp_zone
 }
 
 variable "gcp_project_id" {}
@@ -122,7 +123,6 @@ variable "sd_user_password" {}
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = var.gcp_machine_type
-  zone         = var.gcp_zone
 
   boot_disk {
     initialize_params {
