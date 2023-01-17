@@ -114,7 +114,7 @@ variable "gcp_gpu_count" {
 }
 variable "gcp_zone" {
   type    = string
-  default = "us-central1-a"
+  default = "europe-west4-a"
 }
 
 variable "sd_user_public_key" {}
