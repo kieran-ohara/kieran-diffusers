@@ -5,6 +5,7 @@
     - dvc
     - stable-diffusion
     - vscode
+    - cleanup
   vars:
     username: sd
     vscode_servername: kieran-diffusers

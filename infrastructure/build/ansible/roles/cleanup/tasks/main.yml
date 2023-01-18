@@ -1,0 +1,6 @@
+---
+- name: Clear dnf Cache.
+  command: /usr/bin/dnf clean all
+  become: true
+  tags:
+    - cleanup
