@@ -8,7 +8,16 @@ packer {
       version = ">= 0.0.1"
       source  = "github.com/hashicorp/googlecompute"
     }
+    git = {
+      version = ">= 0.3.2"
+      source = "github.com/ethanmdavidson/git"
+    }
   }
+}
+
+data "git-commit" "cwd-head" { }
+locals {
+  truncated_sha = substr(data.git-commit.cwd-head.hash, 0, 8)
 }
 
 variable "gcp_project_id" {}
@@ -29,11 +38,11 @@ variable "gcp_build_image" {
 source "googlecompute" "rockylinux8" {
   project_id          = var.gcp_project_id
   source_image_family = var.gcp_build_image
-  image_name = "kieran-diffusers-{{timestamp}}"
+  image_name = "kieran-diffusers-${local.truncated_sha}-{{timestamp}}"
   ssh_username        = var.gcp_ssh_username
   zone                = var.gcp_zone
   machine_type        = var.gcp_machine_type
-  disk_size           = 48
+  disk_size           = 44
 }
 
 build {
