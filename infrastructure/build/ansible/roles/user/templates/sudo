@@ -1,0 +1,2 @@
+# user|%group host=(user_runas|%grop_runas) nopass:command
+{{username}} ALL=(root) NOPASSWD:/bin/ncdu,/sbin/shutdown
