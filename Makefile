@@ -1,10 +1,10 @@
 %.ckpt:
 	python ./src/infer/convert-model.py --model_path ./src/train/model/$* --checkpoint_path $@
 
-build:
+image:
 	cd infrastructure/build && aws-vault exec kieran -- packer build .
 
-run:
+deployment:
 	cd infrastructure/run && aws-vault exec kieran -- terraform apply
 
-.PHONY: build run
+.PHONY: image deployment
