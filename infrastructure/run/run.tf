@@ -126,7 +126,7 @@ resource "google_compute_disk" "default" {
   name                      = "kieran-diffusers-src"
   type                      = "pd-ssd"
   physical_block_size_bytes = 4096
-  size = 20
+  size                      = 20
   zone                      = var.gcp_zone
 }
 
