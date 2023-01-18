@@ -29,3 +29,10 @@
   become_user: "{{ username }}"
   args:
     chdir: "/home/{{ username }}/kieran-diffusers/submodules/xformers"
+
+- name: Clear Conda Cache.
+  command: /opt/conda/bin/conda clean --all --yes
+  become: true
+  become_user: "{{ username }}"
+  tags:
+    - cleanup
