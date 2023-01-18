@@ -95,7 +95,7 @@ resource "aws_iam_access_key" "user-key" {
 
 provider "google" {
   project = var.gcp_project_id
-  zone = var.gcp_zone
+  zone    = var.gcp_zone
 }
 
 variable "gcp_project_id" {}
@@ -123,11 +123,11 @@ variable "sd_user_password" {}
 resource "google_compute_disk" "default" {
   provider = google-beta
 
-  name  = "kieran-diffusers-src"
-  type  = "pd-ssd"
+  name                      = "kieran-diffusers-src"
+  type                      = "pd-ssd"
   physical_block_size_bytes = 4096
   size = 20
-  zone = var.gcp_zone
+  zone                      = var.gcp_zone
 }
 
 resource "google_compute_attached_disk" "default" {
