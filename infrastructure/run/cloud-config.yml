@@ -7,7 +7,7 @@ users:
       - ${sd_user_public_key}
 
 mounts:
-  - [sdb, /home/sd/kieran-diffusers]
+  - [sdb, /home/sd/kieran-diffusers-disk]
 mount_default_fields: [None, None, "xfs", "defaults", "0", "2"]
 
 write_files:
