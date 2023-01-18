@@ -99,6 +99,14 @@ provider "google" {
 }
 
 variable "gcp_project_id" {}
+variable "git_email" {
+  type    = string
+  default = "you@git-email.me"
+}
+variable "git_name" {
+  type    = string
+  default = "your git author name"
+}
 
 variable "gcp_machine_image" {
   type    = string
@@ -171,6 +179,8 @@ resource "google_compute_instance" "default" {
         "sd_user_password"      = var.sd_user_password
         "aws_access_key_id"     = aws_iam_access_key.user-key.id
         "aws_secret_access_key" = aws_iam_access_key.user-key.secret
+        "git_name"              = var.git_name
+        "git_email"             = var.git_email
       }
     )
   }
