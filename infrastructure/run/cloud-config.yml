@@ -6,6 +6,10 @@ users:
     ssh_authorized_keys:
     - ${sd_user_public_key}
 
+mounts:
+  - [sdb, /home/sd/kieran-diffusers]
+mount_default_fields: [None, None, "xfs", "defaults", "0", "2"]
+
 write_files:
   - path: /home/sd/.aws/config
     permissions: 0644

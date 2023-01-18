@@ -120,6 +120,21 @@ variable "gcp_zone" {
 variable "sd_user_public_key" {}
 variable "sd_user_password" {}
 
+resource "google_compute_disk" "default" {
+  provider = google-beta
+
+  name  = "kieran-diffusers-src"
+  type  = "pd-ssd"
+  physical_block_size_bytes = 4096
+  size = 20
+  zone = var.gcp_zone
+}
+
+resource "google_compute_attached_disk" "default" {
+  disk     = google_compute_disk.default.id
+  instance = google_compute_instance.default.id
+}
+
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = var.gcp_machine_type
