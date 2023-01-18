@@ -5,6 +5,6 @@ image:
 	cd infrastructure/build && aws-vault exec kieran -- packer build .
 
 deployment:
-	cd infrastructure/run && aws-vault exec kieran -- terraform apply
+	cd infrastructure/run && terraform apply
 
 .PHONY: image deployment
