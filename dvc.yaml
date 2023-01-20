@@ -2,43 +2,42 @@
 stages:
   train:
     cmd: >-
-      accelerate launch submodules/diffusers/examples/dreambooth/train_dreambooth.py 
+      accelerate launch submodules/diffusers/examples/dreambooth/train_dreambooth.py
       --pretrained_model_name_or_path="${pretrained_model}"
-      --class_data_dir="${class.dir}"
-      --class_prompt="${class.prompt}" 
-      --num_class_images="${class.count}" 
-      --instance_data_dir="${instance.dir}"
-      --instance_prompt="${instance.prompt}" 
-      --output_dir=src/train/model 
-      --with_prior_preservation 
-      --prior_loss_weight=1.0 
-      --resolution=512 
-      --train_batch_size=1 
-      --gradient_accumulation_steps=1 
-      --learning_rate="${learning_rate}" 
-      --lr_scheduler="constant" 
-      --lr_warmup_steps=0 
-      --max_train_steps="${training_steps}" 
-      --gradient_checkpointing 
-      --mixed_precision=fp16 
+      --class_data_dir="src/train/data/class-images/${class.prompt}"
+      --class_prompt="${class.prompt}"
+      --num_class_images="${class.count}"
+      --instance_data_dir="src/train/data/instances/${instance.prompt}"
+      --instance_prompt="${instance.prompt}"
+      --output_dir=src/train/model
+      --with_prior_preservation
+      --prior_loss_weight=1.0
+      --resolution=512
+      --train_batch_size=1
+      --gradient_accumulation_steps=1
+      --learning_rate="${learning_rate}"
+      --lr_scheduler="constant"
+      --lr_warmup_steps=0
+      --max_train_steps="${training_steps}"
+      --gradient_checkpointing
+      --mixed_precision=fp16
       --use_8bit_adam
-      && mv src/train/model/${training_steps} src/train/output
+      && mv src/train/model/${training_steps} src/train/model
     params:
       - pretrained_model
-      - class.dir
       - class.prompt
       - class.count
-      - instance.dir
       - instance.prompt
       - learning_rate
       - training_steps
     outs:
-      - src/train/output
+      - src/train/model
+      - src/train/data/class-images/${class.prompt}
   infer:
     foreach: ${infer.prompts}
     do:
       cmd: src/infer/infer.py ${training_steps} -p "${item}" -i "${infer.instance}"
       deps:
-        - src/train/output
+        - src/train/model
       plots:
         - src/infer/output/${item}.png
