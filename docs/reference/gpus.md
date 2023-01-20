@@ -15,15 +15,17 @@ Comparing the different cloud providers re. cost.
 
 ## GCP
 
-| Class          | region       | Price ($ ph) | GPU              | GPU Memory (Gb) | Memory (Gb) | Recommended |
-| -------------- | ------------ | ------------ | ---------------- | --------------- | ----------- | ----------- |
-| n1-standard-4  | us-central1  | 0.38         | Nvidia Tensor T4 | 16              | 15          | x           |
-| n1-standard-4  | us-central1  | 0.63         | Nvidia Tensor T4 | 2x16            | 15          |             |
-| n1-standard-8  | us-central1  | 0.76         | Nvidia Tensor T4 | 2x16            | 30          | x           |
-| n1-standard-8  | europe-west4 | 0.78         | Nvidia Tensor T4 | 2x16            | 30          | x           |
-| n1-standard-8  | us-central1  | 1.25         | Nvidia Tensor T4 | 4x16            | 30          | x           |
-| n1-standard-8  | europe-west4 | 1.28         | Nvidia Tensor T4 | 4x16            | 30          | x           |
-| n1-standard-16 | us-central1  | 1.51         | Nvidia Tensor T4 | 4x16            | 60          |             |
+| Class          | region        | Price ($ ph) | GPU | GPU Memory (Gb) | Memory (Gb) | Recommended         |
+| -------------- | ------------- | ------------ | --- | --------------- | ----------- | ------------------- |
+| n1-standard-4  | us-central1   | 0.38         | T4  | 16              | 15          |                     |
+| n1-standard-4  | europe-west-4 | 0.39         | T4  | 16              | 15          | Check vscode is OK  |
+| n1-standard-8  | europe-west-4 | 0.54         | T4  | 16              | 30          | If vscode is not OK |
+| n1-standard-4  | us-central1   | 0.63         | T4  | 2x16            | 15          |                     |
+| n1-standard-8  | us-central1   | 0.76         | T4  | 2x16            | 30          | x                   |
+| n1-standard-8  | europe-west4  | 0.78         | T4  | 2x16            | 30          | x                   |
+| n1-standard-8  | us-central1   | 1.25         | T4  | 4x16            | 30          | x                   |
+| n1-standard-8  | europe-west4  | 1.28         | T4  | 4x16            | 30          | x                   |
+| n1-standard-16 | us-central1   | 1.51         | T4  | 4x16            | 60          |                     |
 
 # Disk
 
