@@ -1,2 +1,4 @@
 /classes
+!**.dvc
 /instances
+!**.dvc
