@@ -10,8 +10,6 @@ from string import Template
 from image_grid import image_grid
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-PROJECT_ROOT = SCRIPT_DIR+"/../.."
-MODEL_DIR = f'{PROJECT_ROOT}/src/train/output';
 
 def script_dir():
     return SCRIPT_DIR
@@ -20,9 +18,12 @@ def interpolate_prompt(prompt_template, **kwargs):
     template = Template(prompt_template)
     return  template.substitute(**kwargs)
 
-def get_pipeline(MODEL_NAME):
+def get_pipeline():
+    PROJECT_ROOT = SCRIPT_DIR+"/../.."
+    model = f'{PROJECT_ROOT}/src/train/modelx';
+    print(model)
     pipe = StableDiffusionPipeline.from_pretrained(
-        MODEL_DIR,
+        model,
         torch_dtype=torch.float16,
     )
     cuda_pipe = pipe.to("cuda")
@@ -37,12 +38,11 @@ def output_path():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('model')
     parser.add_argument('-p', '--prompts', default="prompts")
     parser.add_argument('-i', '--instance', default="kokieran")
     args = parser.parse_args()
 
-    pipe = get_pipeline(args.model)
+    pipe = get_pipeline()
 
     with open(f'{SCRIPT_DIR}/prompts/{args.prompts}.txt') as file:
         prompts = [interpolate_prompt(line, instance=f'{args.instance}') for line in file]
