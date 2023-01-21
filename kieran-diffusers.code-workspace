@@ -3,5 +3,10 @@
     "recommendations": [
       "iterative.dvc"
     ]
-  }
+  },
+  "folders": [
+    {
+      "path": "."
+    }
+  ]
 }
