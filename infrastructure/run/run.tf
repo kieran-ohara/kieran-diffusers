@@ -150,7 +150,7 @@ resource "google_compute_instance" "default" {
   boot_disk {
     initialize_params {
       image = var.gcp_machine_image
-      size = 44
+      size  = 44
     }
   }
 
