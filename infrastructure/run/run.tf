@@ -143,6 +143,10 @@ resource "google_compute_attached_disk" "default" {
   instance = google_compute_instance.default.id
 }
 
+resource "google_compute_address" "static" {
+  name = "ipv4-address"
+}
+
 resource "google_compute_instance" "default" {
   name         = "test"
   machine_type = var.gcp_machine_type
@@ -167,7 +171,7 @@ resource "google_compute_instance" "default" {
   network_interface {
     network = "default"
     access_config {
-      // Ephemeral public IP
+      nat_ip = google_compute_address.static.address
     }
   }
 
