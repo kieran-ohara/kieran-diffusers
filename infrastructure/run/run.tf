@@ -128,13 +128,18 @@ variable "gcp_zone" {
 variable "sd_user_public_key" {}
 variable "sd_user_password" {}
 
+variable "disk_size_gb" {
+  type    = number
+  default = 20
+}
+
 resource "google_compute_disk" "default" {
   provider = google-beta
 
   name                      = "kieran-diffusers-src"
   type                      = "pd-ssd"
   physical_block_size_bytes = 4096
-  size                      = 20
+  size                      = var.disk_size_gb
   zone                      = var.gcp_zone
 }
 
