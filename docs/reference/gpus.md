@@ -15,17 +15,18 @@ Comparing the different cloud providers re. cost.
 
 ## GCP
 
-| Class          | region        | Price ($ ph) | GPU | GPU Memory (Gb) | Memory (Gb) | Recommended         |
-| -------------- | ------------- | ------------ | --- | --------------- | ----------- | ------------------- |
-| n1-standard-4  | us-central1   | 0.38         | T4  | 16              | 15          |                     |
-| n1-standard-4  | europe-west-4 | 0.39         | T4  | 16              | 15          | Check vscode is OK  |
-| n1-standard-8  | europe-west-4 | 0.54         | T4  | 16              | 30          | If vscode is not OK |
-| n1-standard-4  | us-central1   | 0.63         | T4  | 2x16            | 15          |                     |
-| n1-standard-8  | us-central1   | 0.76         | T4  | 2x16            | 30          | x                   |
-| n1-standard-8  | europe-west4  | 0.78         | T4  | 2x16            | 30          | x                   |
-| n1-standard-8  | us-central1   | 1.25         | T4  | 4x16            | 30          | x                   |
-| n1-standard-8  | europe-west4  | 1.28         | T4  | 4x16            | 30          | x                   |
-| n1-standard-16 | us-central1   | 1.51         | T4  | 4x16            | 60          |                     |
+| Class | region | Price ($ ph) | GPU | GPU Memory (Gb) | Memory (Gb) | Recommended | it/s |
+| -------------- | ------------- | ------------ | --- | --------------- | ----------- | ------------------- | |
+| n1-standard-4 | us-central1 | 0.38 | T4 | 16 | 15 | | |
+| n1-standard-4 | europe-west-4 | 0.39 | T4 | 16 | 15 | Check vscode is OK /run exp in terminal not vscode? | |
+| n1-standard-8 | europe-west-4 | 0.54 | T4 | 16 | 30 | If vscode is not OK | |
+| n1-standard-4 | us-central1 | 0.63 | T4 | 2x16 | 15 | | |
+| n1-standard-4 | europe-west-4 | 0.64 | T4 | 2x16 | 16 | vscode+exp is good| 1.41 it/s, 8g memory |
+| n1-standard-8 | us-central1 | 0.76 | T4 | 2x16 | 30 | | |
+| n1-standard-8 | europe-west4 | 0.78 | T4 | 2x16 | 30 | vscode+exp is good | 1.58 it/s, 8g memory |
+| n1-standard-8 | us-central1 | 1.25 | T4 | 4x16 | 30 | | |
+| n1-standard-8 | europe-west4 | 1.28 | T4 | 4x16 | 30 | | 1.65 it/s, 16g memory, lr=1e-6 |
+| n1-standard-16 | us-central1 | 1.51 | T4 | 4x16 | 60 | | |
 
 # Disk
 
