@@ -28,38 +28,6 @@
   tags:
     - user
 
-- name: Ensure wheel group exists
-  ansible.builtin.group:
-    name: wheel
-    state: present
-  tags:
-    - user
-
-- name: Create user.
-  user:
-    name: "{{ username }}"
-    groups:
-      - wheel
-    home: "/home/{{ username }}"
-    shell: /bin/bash
-    password_lock: false
-  become: true
-  tags:
-    - user
-
-- name: Create User's home directory.
-  file:
-    owner: "{{ username }}"
-    group: wheel
-    state: directory
-    path: "{{ item }}"
-  loop:
-    - "/home/{{username}}"
-    - "/home/{{username}}/.config"
-    - "/home/{{username}}/.config/git"
-  become: true
-  tags:
-    - user
 
 - name: Users Bashrc
   copy:

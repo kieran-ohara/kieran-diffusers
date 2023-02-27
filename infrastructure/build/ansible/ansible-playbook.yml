@@ -1,11 +1,7 @@
 ---
 - hosts: rockylinux8
   roles:
-    - cloud-init
-    - dvc
     - stable-diffusion
-    - vscode
-    - cleanup
   vars:
     username: sd
     vscode_servername: kieran-diffusers

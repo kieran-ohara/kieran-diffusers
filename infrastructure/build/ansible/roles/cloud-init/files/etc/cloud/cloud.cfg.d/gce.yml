@@ -1,4 +1,0 @@
-datasource:
-  GCE:
-    retries: 5
-    sec_between_retries: 1

@@ -1,6 +1,0 @@
----
-dependencies:
-  - role: cuda
-  - role: git
-  - role: python
-  - role: user
